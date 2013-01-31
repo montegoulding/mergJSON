@@ -286,7 +286,7 @@ LIVECODE_FUNCTION(mergJSONEncode)
 LIVECODE_FUNCTION(mergJSONDecode)
 {
     // three parameters: JSON to decode, variable name to place the result, variable name to place keys to be expanded
-    LIVECODE_ARG(3);
+    LIVECODE_ARG(2);
     
     json_t * tJSON;
     json_error_t tError;
@@ -341,11 +341,6 @@ LIVECODE_FUNCTION(mergJSONDecode)
                     free((void *)tArray[i].buffer);
                 }
                 
-                SetVariable(p_arguments[2], tExpandableKeys, &success);
-                free(tExpandableKeys);
-                if (success == EXTERNAL_FAILURE) {
-                    LIVECODE_ERROR("could not set expandable keys");
-                }
              }
             break;
         case JSON_OBJECT:
@@ -385,11 +380,6 @@ LIVECODE_FUNCTION(mergJSONDecode)
                     free((void *)tArray[i].buffer);
                 }
                 
-                SetVariable(p_arguments[2], tExpandableKeys, &success);
-                free(tExpandableKeys);
-                if (success == EXTERNAL_FAILURE) {
-                    LIVECODE_ERROR("could not set expandable keys");
-                }
             }
             break;
         default:
@@ -400,19 +390,12 @@ LIVECODE_FUNCTION(mergJSONDecode)
         }
             break;
     }
-    if (!json_is_array(tJSON) && !json_is_object(tJSON)) {
-        SetVariable(p_arguments[2], tExpandableKeys, &success);
-        if (success == EXTERNAL_FAILURE) {
-            LIVECODE_ERROR("could not set expandable keys");
-        }
-        free(tExpandableKeys);
-    }
-    json_decref(tJSON);
-    LIVECODE_NOERROR;
+     json_decref(tJSON);
+    LIVECODE_RETURN_THIS_STRING(tExpandableKeys);
 }
 
 
 EXTERNAL_BEGIN_DECLARATIONS("mergJSON")
 EXTERNAL_DECLARE_FUNCTION("mergJSONEncode", mergJSONEncode)
-EXTERNAL_DECLARE_COMMAND("mergJSONDecode", mergJSONDecode)
+EXTERNAL_DECLARE_FUNCTION("mergJSONDecode", mergJSONDecode)
 EXTERNAL_END_DECLARATIONS
