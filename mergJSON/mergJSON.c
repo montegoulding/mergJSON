@@ -112,42 +112,39 @@ char * getPrimitiveString(json_t * tJSON) {
     
 }
 
-json_t * getPrimitiveJSON(char * tString,char * tForceType) {
+json_t * getPrimitiveJSON(char * tString,const char * tForceType) {
     json_t * tJSON;
-    if (tString[0] == '}') {
-        
-    }
-    if (!strcmp(tString, "{}")) { // empty object
-        tJSON = json_object();
-    } else if (!strcmp(tString, "[]")) { // empty array
-        tJSON = json_array();
-    } else if (!strcmp(tString, "true")) { // true
-        tJSON = json_true();
-    } else if (!strcmp(tString, "false")) { // true
-        tJSON = json_false();
-    } else if (!strcmp(tString, "null")) { // true
-        tJSON = json_null();
-    } else {
-        Bool tIsString = False;
-        if (isdigit(tString[0])) {
-            char * tEnd;
-            json_int_t tIntVal = strtoll(tString,&tEnd,10);
-            if (!*tEnd && !errno) {
-                tJSON = json_integer(tIntVal);
-            }
-            double tDoubleVal = strtod(tString,&tEnd);
-            if (!*tEnd && !errno) {
-                tJSON = json_real(tDoubleVal);
+    Bool tIsString = tForceType != NULL && !strcmp(tForceType, "string");
+    if (!tIsString) {
+         // need to encode
+        if (!strcmp(tString, "true")) { // true
+            tJSON = json_true();
+        } else if (!strcmp(tString, "false")) { // true
+            tJSON = json_false();
+        } else if (!strcmp(tString, "null")) { // true
+            tJSON = json_null();
+        } else {
+            if (isdigit(tString[0])) {
+                char * tEnd;
+                json_int_t tIntVal = strtoll(tString,&tEnd,10);
+                if (!*tEnd && !errno) {
+                    tJSON = json_integer(tIntVal);
+                }
+                double tDoubleVal = strtod(tString,&tEnd);
+                if (!*tEnd && !errno) {
+                    tJSON = json_real(tDoubleVal);
+                } else {
+                    tIsString = True;
+                }
             } else {
                 tIsString = True;
             }
-        } else {
-            tIsString = True;
-        }
-        if (tIsString) { // it's a string
-            tJSON = json_string(tString);
         }
     }
+    if (tIsString) { // it's a string
+        tJSON = json_string(tString);
+    }
+    
     return tJSON;
 }
 
@@ -156,27 +153,40 @@ LIVECODE_FUNCTION(mergJSONEncode)
     // one parameter: Array or variable to encode
     LIVECODE_ARG(1);
     
-    char * tForceType;
+    char * tForceType = NULL;
     if (p_argument_count > 1) {
-        LIVECODE_READARG(tForceType, 1, "%s");
+        tForceType = p_arguments[1];
     }
     
     Bool tPretty = False;
     if (p_argument_count > 2) {
-        tPretty = !strcmp(p_arguments[1], "true");
+        tPretty = !strcmp(p_arguments[2], "true");
     }
     int tSuccess;
     int tKeycount = 0;
     json_t * tJSON;
-    char * tErrorString;
+    char * tErrorString = NULL;
     
     GetArray(p_arguments[0], &tKeycount, NULL, NULL, &tSuccess);
     if (tSuccess == EXTERNAL_FAILURE || tKeycount == 0) {
         
         char * tString = GetVariable(p_arguments[0], &tSuccess);
         if (tSuccess == EXTERNAL_SUCCESS) {
-            tJSON = getPrimitiveJSON(tString,tForceType);
+            if (tString[0] == '}') {
+                // it's pre-encoded
+                json_error_t tError;
+                tJSON = json_loads(tString+1, JSON_DECODE_ANY, &tError);
+                if (!tJSON) {
+                    tErrorString = malloc(strlen("could not decode JSON: ")+strlen(tError.text)+1);
+                    sprintf(tErrorString,"could not decode JSON: %s",tError.text);
+                    free(tString);
+                    LIVECODE_ERROR(tErrorString);
+                }
+            } else {
+                tJSON = getPrimitiveJSON(tString,tForceType);
+            }
             free(tString);
+            
         } else {
              LIVECODE_ERROR("could not read variable");
         }
@@ -212,7 +222,7 @@ LIVECODE_FUNCTION(mergJSONEncode)
                 }
             }
         }
-        if (tIsArray) {
+        if (tIsArray && (tForceType != NULL && strcmp(tForceType, "object"))) {
             tJSON = json_array();
         } else {
             tJSON = json_object();
@@ -224,25 +234,31 @@ LIVECODE_FUNCTION(mergJSONEncode)
         
         for (int i=0; i<tKeycount; i++) {
             if (!tDecodingError) {
-                if (tIsArray) {
+                if (tIsArray && (tForceType != NULL && strcmp(tForceType, "object"))) {
                     tKeyIndex = tKeyMap[i];
                 } else {
                     tKeyIndex = i;
                 }
                 json_t * tKeyJSON;
                 json_error_t tError;
-                tKeyJSON = json_loadb(tArray[tKeyIndex].buffer, tArray[tKeyIndex].length, JSON_DECODE_ANY, &tError);
-                if (!tKeyJSON) {
-                    tErrorString = malloc(strlen("could not decode JSON in array element: ")+strlen(tError.text)+1);
-                    sprintf(tErrorString,"could not decode JSON in array element: %s",tError.text);
-                    tDecodingError = True;
+                if (tArray[tKeyIndex].buffer[0] == '}') {
+                    // it's pre-encoded so we skip the first char from the buffer
+                    tKeyJSON = json_loadb(tArray[tKeyIndex].buffer+1, tArray[tKeyIndex].length-1, JSON_DECODE_ANY, &tError);
+                    if (!tKeyJSON) {
+                        tErrorString = malloc(strlen("could not decode JSON in array element: ")+strlen(tError.text)+1);
+                        sprintf(tErrorString,"could not decode JSON in array element: %s",tError.text);
+                        tDecodingError = True;
+                    }
+                } else {
+                    // need to encode primitive
+                    char * tString = (char *)malloc(tArray[tKeyIndex].length+1);
+                    memcpy(tString, tArray[tKeyIndex].buffer, tArray[tKeyIndex].length);
+                    tString[tArray[tKeyIndex].length] = 0;
+                    tKeyJSON = getPrimitiveJSON(tString,tForceType);
+                    free(tString);
                 }
-                //                char * tString = (char *)malloc(tArray[tKeyIndex].length+1);
-                //                memcpy(tString, tArray[tKeyIndex].buffer, tArray[tKeyIndex].length);
-                //                ((char*)tString)[tArray[tKeyIndex].length] = 0;
-                //                tKeyJSON = getPrimitiveJSON(tString);
-                //                free(tString);
-                if (tIsArray) {
+                //tForceType == NULL || 
+                if (tIsArray && (tForceType != NULL && strcmp(tForceType, "object"))) {
                     json_array_append_new(tJSON, tKeyJSON);
                 } else {
                     json_object_set_new(tJSON, tKeys[tKeyIndex], tKeyJSON);
