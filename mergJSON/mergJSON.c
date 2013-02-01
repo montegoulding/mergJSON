@@ -32,13 +32,6 @@
 
 #define LIVECODE_READARG(var, number, tmpl) if(!sscanf(p_arguments[ number ], tmpl, & var)) { 	LIVECODE_ERROR("Failed to read argument"); }
 
-#define LIVECODE_READVARIABLE(var,number) { \
-GetVariable(p_arguments[ number ], &success); \
-if (success == EXTERNAL_FAILURE) { \
-LIVECODE_ERROR("Could not read variable"); \
-} \
-}
-
 #define LIVECODE_WRITEVARIABLE(var,number) { \
 SetVariable(p_arguments[ number ],var, &success); \
 if (success == EXTERNAL_FAILURE) { \
@@ -48,24 +41,11 @@ LIVECODE_ERROR("Could not write variable"); \
 
 #define LIVECODE_ARG(argn) { if(p_argument_count < argn) { 	LIVECODE_ERROR("Incorrect number of arguments"); }}
 
-#define LIVECODE_NOERROR { *r_err = False; *r_pass = False; *r_result = strdup(""); }
-
 #define LIVECODE_RETURN_THIS_STRING(x) { \
 *r_err = False; *r_pass = False; \
 if (x == NULL) { *r_result = strdup(""); } \
 else { *r_result = x; }}
 
-#define LIVECODE_RETURN_UNSIGNED { \
-*r_err = False; *r_pass = False; \
-*r_result = (char *)malloc(20); \
-snprintf(*r_result, 20, "%d", result); \
-}
-
-#define LIVECODE_RETURN_UNSIGNED_LONG { \
-*r_err = False; *r_pass = False; \
-*r_result = (char *)malloc(sizeof(long)); \
-snprintf(*r_result, sizeof(long), "%ld", result); \
-}
 
 /* calling function must free the return val */
 char * getPrimitiveString(json_t * tJSON) {
@@ -129,12 +109,13 @@ json_t * getPrimitiveJSON(char * tString,const char * tForceType) {
                 json_int_t tIntVal = strtoll(tString,&tEnd,10);
                 if (!*tEnd && !errno) {
                     tJSON = json_integer(tIntVal);
-                }
-                double tDoubleVal = strtod(tString,&tEnd);
-                if (!*tEnd && !errno) {
-                    tJSON = json_real(tDoubleVal);
                 } else {
-                    tIsString = True;
+                    double tDoubleVal = strtod(tString,&tEnd);
+                    if (!*tEnd && !errno) {
+                        tJSON = json_real(tDoubleVal);
+                    } else {
+                        tIsString = True;
+                    }
                 }
             } else {
                 tIsString = True;
@@ -172,23 +153,33 @@ LIVECODE_FUNCTION(mergJSONEncode)
         
         char * tString = GetVariable(p_arguments[0], &tSuccess);
         if (tSuccess == EXTERNAL_SUCCESS) {
-            if (tString[0] == '}') {
-                // it's pre-encoded
-                json_error_t tError;
-                tJSON = json_loads(tString+1, JSON_DECODE_ANY, &tError);
-                if (!tJSON) {
-                    tErrorString = malloc(strlen("could not decode JSON: ")+strlen(tError.text)+1);
-                    sprintf(tErrorString,"could not decode JSON: %s",tError.text);
-                    free(tString);
-                    LIVECODE_ERROR(tErrorString);
+            
+            // could be an empty string the user wants as object or array
+            if (strlen(tString) == 0 && (tForceType != NULL && (!strcmp(tForceType, "object") || !strcmp(tForceType, "array")))) {
+                if (!strcmp(tForceType, "object")) {
+                    tJSON = json_object();
+                } else {
+                    tJSON = json_array();
                 }
             } else {
-                tJSON = getPrimitiveJSON(tString,tForceType);
+                if (tString[0] == '}' && (tForceType != NULL && strcmp(tForceType, "string"))) {
+                    // it's pre-encoded
+                    json_error_t tError;
+                    tJSON = json_loads(tString+1, JSON_DECODE_ANY, &tError);
+                    if (!tJSON) {
+                        tErrorString = malloc(strlen("could not decode JSON: ")+strlen(tError.text)+1);
+                        sprintf(tErrorString,"could not decode JSON: %s",tError.text);
+                        free(tString);
+                        LIVECODE_ERROR(tErrorString);
+                    }
+                } else {
+                    tJSON = getPrimitiveJSON(tString,tForceType);
+                }
             }
             free(tString);
             
         } else {
-             LIVECODE_ERROR("could not read variable");
+            LIVECODE_ERROR("could not read variable");
         }
         
     } else {
