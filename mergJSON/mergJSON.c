@@ -66,14 +66,16 @@ char * getPrimitiveString(json_t * tJSON) {
             break;
         case JSON_INTEGER:
         {
-            tReturn = (char*)malloc(sizeof(long long));
-            snprintf(tReturn,sizeof(long long),"%lld",json_integer_value(tJSON));
+            const int tLength = snprintf(NULL,0,"%lld",json_integer_value(tJSON))+1;
+            tReturn = (char*)malloc(tLength);
+            snprintf(tReturn,tLength,"%lld",json_integer_value(tJSON));
         }
             break;
         case JSON_REAL:
         {
-            tReturn = (char*)malloc(sizeof(double));
-            snprintf(tReturn,sizeof(double),"%lf",json_real_value(tJSON));
+            const int tLength = snprintf(NULL,0,"%lf",json_real_value(tJSON))+1;
+            tReturn = (char*)malloc(tLength);
+            snprintf(tReturn,tLength,"%lf",json_real_value(tJSON));
         }
             break;
         case JSON_STRING:
@@ -104,7 +106,7 @@ json_t * getPrimitiveJSON(char * tString,const char * tForceType) {
         } else if (!strcmp(tString, "null")) { // true
             tJSON = json_null();
         } else {
-            if (isdigit(tString[0])) {
+            if (isdigit(tString[0]) || tString[0] == '-') {
                 char * tEnd;
                 json_int_t tIntVal = strtoll(tString,&tEnd,10);
                 if (!*tEnd && !errno) {
@@ -162,7 +164,7 @@ LIVECODE_FUNCTION(mergJSONEncode)
                     tJSON = json_array();
                 }
             } else {
-                if (tString[0] == '}' && (tForceType != NULL && strcmp(tForceType, "string"))) {
+                if (tString[0] == '}' && (tForceType == NULL  || strcmp(tForceType, "string"))) {
                     // it's pre-encoded
                     json_error_t tError;
                     tJSON = json_loads(tString+1, JSON_DECODE_ANY, &tError);
@@ -174,6 +176,10 @@ LIVECODE_FUNCTION(mergJSONEncode)
                     }
                 } else {
                     tJSON = getPrimitiveJSON(tString,tForceType);
+                    if (!tJSON) {
+                        free(tString);
+                        LIVECODE_ERROR("could not encode value");
+                    }
                 }
             }
             free(tString);
@@ -190,30 +196,39 @@ LIVECODE_FUNCTION(mergJSONEncode)
         if (tSuccess == EXTERNAL_FAILURE) LIVECODE_ERROR("could not read variable");
         
         // NEED TO MAINTAIN ARRAY ORDER IN JSON ARRAYS BUT LC ARRAY KEYS ARE OUT OF NUMERIC ORDER
-        Bool tIsArray = True;
+        Bool tIsArray = (True  && (tForceType != NULL && strcmp(tForceType, "object")));
         int tKeyMap[tKeycount];
         Bool tCheckMap[tKeycount];
         int tKey;
-        for (int i=0; i<tKeycount; i++) {
-            if (sscanf(tKeys[i],"%d",&tKey)==1) {
-                if (tKey > 0 && tKey <= tKeycount) {
-                    tKeyMap[tKey-1] = i;
-                    tCheckMap[tKey-1] = True;
+        
+        if (tIsArray) {
+            for (int i=0; i<tKeycount; i++) {
+                if (sscanf(tKeys[i],"%d",&tKey)==1) {
+                    if (tKey > 0 && tKey <= tKeycount) {
+                        tKeyMap[tKey-1] = i;
+                        tCheckMap[tKey-1] = True;
+                    } else {
+                        tIsArray = False;
+                        break;
+                    }
                 } else {
                     tIsArray = False;
+                    break;
                 }
-            } else {
-                tIsArray = False;
+            }
+            
+            // This makes sure that the keys start with 1 -> tKeycount
+            
+            if (tIsArray) {
+                for (int i=0;i<tKeycount;i++) {
+                    if (!tCheckMap[i]) {
+                        tIsArray = False;
+                        break;
+                    }
+                }
             }
         }
         if (tIsArray) {
-            for (int i=0;i<tKeycount;i++) {
-                if (!tCheckMap[i]) {
-                    tIsArray = False;
-                }
-            }
-        }
-        if (tIsArray && (tForceType != NULL && strcmp(tForceType, "object"))) {
             tJSON = json_array();
         } else {
             tJSON = json_object();
@@ -225,31 +240,38 @@ LIVECODE_FUNCTION(mergJSONEncode)
         
         for (int i=0; i<tKeycount; i++) {
             if (!tDecodingError) {
-                if (tIsArray && (tForceType != NULL && strcmp(tForceType, "object"))) {
+                if (tIsArray) {
                     tKeyIndex = tKeyMap[i];
                 } else {
                     tKeyIndex = i;
                 }
                 json_t * tKeyJSON;
                 json_error_t tError;
-                if (tArray[tKeyIndex].buffer[0] == '}') {
-                    // it's pre-encoded so we skip the first char from the buffer
-                    tKeyJSON = json_loadb(tArray[tKeyIndex].buffer+1, tArray[tKeyIndex].length-1, JSON_DECODE_ANY, &tError);
-                    if (!tKeyJSON) {
-                        tErrorString = malloc(strlen("could not decode JSON in array element: ")+strlen(tError.text)+1);
-                        sprintf(tErrorString,"could not decode JSON in array element: %s",tError.text);
-                        tDecodingError = True;
-                    }
+                if (tArray[tKeyIndex].buffer == NULL) {
+                    tKeyJSON = json_null();
                 } else {
-                    // need to encode primitive
-                    char * tString = (char *)malloc(tArray[tKeyIndex].length+1);
-                    memcpy(tString, tArray[tKeyIndex].buffer, tArray[tKeyIndex].length);
-                    tString[tArray[tKeyIndex].length] = 0;
-                    tKeyJSON = getPrimitiveJSON(tString,tForceType);
-                    free(tString);
+                    if (tArray[tKeyIndex].buffer[0] == '}') {
+                        // it's pre-encoded so we skip the first char from the buffer
+                        tKeyJSON = json_loadb(tArray[tKeyIndex].buffer+1, tArray[tKeyIndex].length-1, JSON_DECODE_ANY, &tError);
+                        if (!tKeyJSON) {
+                            tErrorString = malloc(strlen("could not decode JSON in array element: ")+strlen(tError.text)+1);
+                            sprintf(tErrorString,"could not decode JSON in array element: %s",tError.text);
+                            tDecodingError = True;
+                        }
+                    } else {
+                        // need to encode primitive
+                        char * tString = (char *)malloc(tArray[tKeyIndex].length+1);
+                        memcpy(tString, tArray[tKeyIndex].buffer, tArray[tKeyIndex].length);
+                        tString[tArray[tKeyIndex].length] = 0;
+                        tKeyJSON = getPrimitiveJSON(tString,NULL);
+                        free(tString);
+                        if (!tKeyJSON) {
+                            LIVECODE_ERROR("could not encode value in array element");
+                        }
+                    }
                 }
-                //tForceType == NULL || 
-                if (tIsArray && (tForceType != NULL && strcmp(tForceType, "object"))) {
+                //tForceType == NULL ||
+                if (tIsArray) {
                     json_array_append_new(tJSON, tKeyJSON);
                 } else {
                     json_object_set_new(tJSON, tKeys[tKeyIndex], tKeyJSON);
@@ -297,14 +319,15 @@ LIVECODE_FUNCTION(mergJSONDecode)
     char *tExpandableKeysPtr;
     
     int success;
-    
+    int tSize;
     switch (json_typeof(tJSON)) {
         case JSON_ARRAY:
             if (json_array_size(tJSON) == 0) {
-                LIVECODE_WRITEVARIABLE("[]", 1);
+                LIVECODE_WRITEVARIABLE("", 1);
             } else {
-                ExternalString tArray[json_array_size(tJSON)];
-                for (int i = 0;i < json_array_size(tJSON);i++) {
+                tSize = json_array_size(tJSON);
+                ExternalString tArray[tSize];
+                for (int i = 0;i < tSize;i++) {
                     json_t * tValue = json_array_get(tJSON, i);
                     char * tKeyJSON;
                     if (json_is_array(tValue) || json_is_object(tValue)) {
@@ -324,11 +347,11 @@ LIVECODE_FUNCTION(mergJSONDecode)
                     tArray[i].length = (int)strlen(tKeyJSON);
                     
                 }
-                SetArray(p_arguments[1], (int) json_array_size(tJSON), tArray, NULL, &success);
+                SetArray(p_arguments[1], tSize, tArray, NULL, &success);
                 if (success == EXTERNAL_FAILURE) {
                     LIVECODE_ERROR("could not set array");
                 }
-                for (int i=1;i<json_object_size(tJSON);i++) {
+                for (int i=1;i<tSize;i++) {
                     free((void *)tArray[i].buffer);
                 }
                 
@@ -336,10 +359,11 @@ LIVECODE_FUNCTION(mergJSONDecode)
             break;
         case JSON_OBJECT:
             if (json_object_size(tJSON) == 0) {
-                LIVECODE_WRITEVARIABLE("{}", 1);
+                LIVECODE_WRITEVARIABLE("", 1);
             } else {
-                ExternalString tArray[json_object_size(tJSON)];
-                char *tKeys[json_object_size(tJSON)];
+                tSize = json_object_size(tJSON);
+                ExternalString tArray[tSize];
+                char *tKeys[tSize];
                 const char *tKey;
                 json_t *tValue;
                 int i = 0;
@@ -362,12 +386,12 @@ LIVECODE_FUNCTION(mergJSONDecode)
                     
                     i++;
                 }
-                SetArray(p_arguments[1], (int) json_object_size(tJSON), tArray, tKeys, &success);
+                SetArray(p_arguments[1], tSize, tArray, tKeys, &success);
                 if (success == EXTERNAL_FAILURE) {
                     LIVECODE_ERROR("could not set array");
                 }
                 
-                for (int i=1;i<json_object_size(tJSON);i++) {
+                for (int i=1;i<tSize;i++) {
                     free((void *)tArray[i].buffer);
                 }
                 
