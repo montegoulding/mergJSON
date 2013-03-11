@@ -10,6 +10,8 @@ Author
 
 Support the project by using me as a [consultant](http://goulding,ws) or by buying [mergExt](http://mergext.com)
 
+mergJSON uses the Jansson library Copyright (c) 2009-2012 Petri Lehtinen under the terms of the MIT license. See the LICENSE file in the jansson submodule for details.
+
 License
 -------
 This external is available under a dual-license. If you are doing commercial work with it please purchase a commercial license from [mergExt](http://mergext.com) otherwise you are free to use under the GPL 3 license. The intention is that it's free to use wherever [LiveCode](http://runrev.com) is free to use.
