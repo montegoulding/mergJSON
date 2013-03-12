@@ -23,6 +23,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B22BC37D16EF3B8D00865342 /* jansson_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = jansson_config.h; sourceTree = "<group>"; };
+		B22BC38016EF3DF200865342 /* jansson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; name = jansson.h; path = mergJSON/jansson/src/jansson.h; sourceTree = "<group>"; };
+		B22BC38116EF3DF200865342 /* hashtable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; name = hashtable.h; path = mergJSON/jansson/src/hashtable.h; sourceTree = "<group>"; };
+		B22BC38216EF3DF200865342 /* jansson_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; name = jansson_private.h; path = mergJSON/jansson/src/jansson_private.h; sourceTree = "<group>"; };
+		B22BC38316EF3DF200865342 /* strbuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; name = strbuffer.h; path = mergJSON/jansson/src/strbuffer.h; sourceTree = "<group>"; };
+		B22BC38416EF3DF200865342 /* utf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; name = utf.h; path = mergJSON/jansson/src/utf.h; sourceTree = "<group>"; };
 		B262C13316B3F772002D4FEC /* external.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = external.c; sourceTree = "<group>"; };
 		B262C13416B3F772002D4FEC /* external.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = external.h; sourceTree = "<group>"; };
 		B285232F16B3FBF500159A3F /* mergJSON.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mergJSON.c; sourceTree = "<group>"; };
@@ -64,6 +70,11 @@
 		B28F3C8216B3F5E1009D2F35 = {
 			isa = PBXGroup;
 			children = (
+				B22BC38016EF3DF200865342 /* jansson.h */,
+				B22BC38116EF3DF200865342 /* hashtable.h */,
+				B22BC38216EF3DF200865342 /* jansson_private.h */,
+				B22BC38316EF3DF200865342 /* strbuffer.h */,
+				B22BC38416EF3DF200865342 /* utf.h */,
 				B2FFECA916EC9C2F005E495C /* dump.c */,
 				B2FFECAA16EC9C2F005E495C /* error.c */,
 				B2FFECAB16EC9C2F005E495C /* hashtable.c */,
@@ -101,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				B285232F16B3FBF500159A3F /* mergJSON.c */,
+				B22BC37D16EF3B8D00865342 /* jansson_config.h */,
 				B262C13316B3F772002D4FEC /* external.c */,
 				B262C13416B3F772002D4FEC /* external.h */,
 				B28F3C9316B3F5E1009D2F35 /* Supporting Files */,
@@ -314,11 +326,12 @@
 		B28F3C9C16B3F5E1009D2F35 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
-				HEADER_SEARCH_PATHS = "/Users/montegoulding/jansson/src/**";
+				HEADER_SEARCH_PATHS = /Users/montegoulding/jansson/src;
 				INFOPLIST_FILE = "mergJSON/mergJSON-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
@@ -331,11 +344,12 @@
 		B28F3C9D16B3F5E1009D2F35 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
-				HEADER_SEARCH_PATHS = "/Users/montegoulding/jansson/src/**";
+				HEADER_SEARCH_PATHS = /Users/montegoulding/jansson/src;
 				INFOPLIST_FILE = "mergJSON/mergJSON-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
