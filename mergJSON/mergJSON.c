@@ -275,7 +275,8 @@ LIVECODE_FUNCTION(mergJSONEncode)
     }
     size_t tFlags = JSON_ENCODE_ANY;
     if (tPretty) {
-        tFlags = tFlags | JSON_INDENT(2) | JSON_SORT_KEYS;
+        tFlags = tFlags | JSON_INDENT(2);
+        tFlags = tFlags | JSON_SORT_KEYS;
     } else {
         tFlags = tFlags | JSON_COMPACT;
     }
