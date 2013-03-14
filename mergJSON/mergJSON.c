@@ -247,19 +247,31 @@ LIVECODE_FUNCTION(mergJSONEncode)
                 tKeyJSON = json_string("");
             } else {
                 if (tArray[tKeyIndex].buffer[0] == '}') {
-                    // it's pre-encoded so we skip the first char from the buffer
-                    tKeyJSON = json_loadb(tArray[tKeyIndex].buffer+1, tArray[tKeyIndex].length-1, JSON_DECODE_ANY, &tError);
-                    if (!tKeyJSON) {
-                        tErrorString = malloc(strlen("could not decode JSON in array element: ")+strlen(tError.text)+1);
-                        json_decref(tJSON);
-                        LIVECODE_ERROR(tErrorString);
+                    // it' either being forced to be string or it's already encoded
+                    if (tArray[tKeyIndex].buffer[1] == '}') {
+                        char * tString = (char *)malloc(tArray[tKeyIndex].length-1);
+                        memcpy(tString, tArray[tKeyIndex].buffer+2, tArray[tKeyIndex].length-2);
+                        tString[tArray[tKeyIndex].length-2] = 0;
+                        tKeyJSON = json_string(tString);
+                        free(tString);
+                        if (!tKeyJSON) {
+                            LIVECODE_ERROR("could not encode value in array element");
+                        }
+                    } else {
+                        // it's pre-encoded so we skip the first char from the buffer
+                        tKeyJSON = json_loadb(tArray[tKeyIndex].buffer+1, tArray[tKeyIndex].length-1, JSON_DECODE_ANY, &tError);
+                        if (!tKeyJSON) {
+                            tErrorString = malloc(strlen("could not decode JSON in array element: ")+strlen(tError.text)+1);
+                            json_decref(tJSON);
+                            LIVECODE_ERROR(tErrorString);
+                        }
                     }
                 } else {
                     // need to encode primitive
                     char * tString = (char *)malloc(tArray[tKeyIndex].length+1);
                     memcpy(tString, tArray[tKeyIndex].buffer, tArray[tKeyIndex].length);
                     tString[tArray[tKeyIndex].length] = 0;
-                    tKeyJSON = getPrimitiveJSON(tString,NULL);
+                    tKeyJSON = getPrimitiveJSON(tString,tForceType);
                     free(tString);
                     if (!tKeyJSON) {
                         LIVECODE_ERROR("could not encode value in array element");
