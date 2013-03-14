@@ -1,0 +1,13 @@
+{
+  "class": "com.runrev.engine.stack",
+  "customPropertySets": {
+    "cREVGeometryCache": {
+      "stackID": "1029"
+    }
+  },
+  "properties": {
+    "height": "423",
+    "name": "mergJSON",
+    "width": "509"
+  }
+}

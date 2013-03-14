@@ -1,0 +1,3 @@
+on menuPick pItemName
+   send menuPick&&the label of btn "tests" to btn "tests"
+end menuPick

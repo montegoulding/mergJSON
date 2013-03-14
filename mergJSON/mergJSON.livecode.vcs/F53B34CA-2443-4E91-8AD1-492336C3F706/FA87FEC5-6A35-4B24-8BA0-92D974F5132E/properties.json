@@ -1,0 +1,19 @@
+{
+  "class": "com.runrev.engine.button",
+  "customPropertySets": {
+    "cREVGeneral": {
+      "revUniqueID": "1363237111200"
+    }
+  },
+  "properties": {
+    "armBorder": "false",
+    "autoHilite": "false",
+    "menuMode": "option",
+    "name": "force",
+    "rect": "340,4,442,26",
+    "style": "menu",
+    "textAlign": "center",
+    "traversalOn": "false",
+    "unicodeText": "\nstring\nobject\n"
+  }
+}

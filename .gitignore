@@ -15,3 +15,10 @@ profile
 DerivedData
 .idea/
 *.hmap
+# LiveCode
+*.livecode
+*.rev
+*.mc
+# Binaries
+*.dll
+*.so

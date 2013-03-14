@@ -1,0 +1,37 @@
+{
+  "class": "com.runrev.engine.field",
+  "customPropertySets": {
+    "cREVGeneral": {
+      "revUniqueID": "1359267218991"
+    },
+    "cREVGeometry": {
+      "Master": "true",
+      "Master,cardRanking": "2",
+      "Master,expectedRect": "0,32,646,532",
+      "Master,movehDistance": "false",
+      "Master,movevDistance": "false",
+      "Master,scaleBottom": "true",
+      "Master,scaleBottomAbsolute": "true",
+      "Master,scaleBottomObjectRef": "card",
+      "Master,scaleBottomObjectSide": "Bottom",
+      "Master,scaleRight": "true",
+      "Master,scaleRightAbsolute": "true",
+      "Master,scaleRightObjectRef": "card",
+      "Master,scaleRightObjectSide": "Right",
+      "Master,scalebottomDistance": "293",
+      "Master,scaleleftDistance": "",
+      "Master,scalerightDistance": "501",
+      "Master,scaletopDistance": ""
+    }
+  },
+  "properties": {
+    "hScrollbar": "true",
+    "htmlText": "<p>{</p>\n<p>  \"widget\": {</p>\n<p>    \"debug\": \"on\",</p>\n<p>    \"image\": {</p>\n<p>      \"alignment\": \"center\",</p>\n<p>      \"hOffset\": \"250\",</p>\n<p>      \"name\": \"sun1\",</p>\n<p>      \"src\": \"Images/Sun.png\",</p>\n<p>      \"vOffset\": 250</p>\n<p>    },</p>\n<p>    \"text\": {</p>\n<p>      \"alignment\": \"center\",</p>\n<p>      \"data\": \"Click Here\",</p>\n<p>      \"hOffset\": 250,</p>\n<p>      \"name\": \"text1\",</p>\n<p>      \"onMouseUp\": \"sun1.opacity = (sun1.opacity / 100) * 90;\",</p>\n<p>      \"size\": 36,</p>\n<p>      \"style\": \"bold\",</p>\n<p>      \"vOffset\": 100</p>\n<p>    },</p>\n<p>    \"window\": {</p>\n<p>      \"height\": 500,</p>\n<p>      \"name\": \"main_window\",</p>\n<p>      \"title\": \"Sample Konfabulator Widget\",</p>\n<p>      \"width\": 500</p>\n<p>    }</p>\n<p>  }</p>\n<p>}</p>",
+    "name": "Field",
+    "rect": "0,32,509,424",
+    "scrollbarWidth": "16",
+    "style": "scrolling",
+    "textAlign": "left",
+    "vScrollbar": "true"
+  }
+}

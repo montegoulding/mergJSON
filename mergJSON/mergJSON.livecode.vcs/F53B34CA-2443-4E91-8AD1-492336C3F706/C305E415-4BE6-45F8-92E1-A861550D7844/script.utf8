@@ -1,0 +1,3 @@
+on mouseUp
+   send menuPick&&the label of btn "tests" to btn "tests"
+end mouseUp

@@ -1,0 +1,25 @@
+{
+  "class": "com.runrev.engine.field",
+  "customPropertySets": {
+    "cREVGeneral": {
+      "revUniqueID": "1363237249897"
+    },
+    "cREVTable": {
+      "currentview": "force"
+    }
+  },
+  "properties": {
+    "autoHilite": "false",
+    "dontWrap": "true",
+    "htmlText": "<p>force</p>",
+    "lockText": "true",
+    "name": "Label Field",
+    "opaque": "false",
+    "rect": "288,4,342,26",
+    "sharedText": "true",
+    "showBorder": "false",
+    "style": "transparent",
+    "textAlign": "right",
+    "traversalOn": "false"
+  }
+}
