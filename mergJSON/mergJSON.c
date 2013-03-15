@@ -19,7 +19,7 @@
 /*
  
  These definitions make working with the desktop externals sdk just bearable.
- Many are from Trever DaVore's SSL library but I've added a few of my own.
+ Many are from Trever DeVore's SSL library but I've added a few of my own.
  
  */
 

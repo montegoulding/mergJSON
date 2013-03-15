@@ -13,3 +13,7 @@ on mouseDown
    put the customKeys["tests"] of me into me
    sort me numeric
 end mouseDown
+
+on lcVCSExport
+   set the text of me to empty
+end lcVCSExport

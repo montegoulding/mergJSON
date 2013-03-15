@@ -17,3 +17,7 @@ function JSONToArray pJSON
    end repeat
    return tArray
 end JSONToArray
+
+on lcVCSExport
+   set the rect of this stack to 100,100,600,600
+end lcVCSExport

@@ -26,9 +26,8 @@
   },
   "properties": {
     "hScrollbar": "true",
-    "htmlText": "<p>{</p>\n<p>  \"widget\": {</p>\n<p>    \"debug\": \"on\",</p>\n<p>    \"image\": {</p>\n<p>      \"alignment\": \"center\",</p>\n<p>      \"hOffset\": \"250\",</p>\n<p>      \"name\": \"sun1\",</p>\n<p>      \"src\": \"Images/Sun.png\",</p>\n<p>      \"vOffset\": 250</p>\n<p>    },</p>\n<p>    \"text\": {</p>\n<p>      \"alignment\": \"center\",</p>\n<p>      \"data\": \"Click Here\",</p>\n<p>      \"hOffset\": 250,</p>\n<p>      \"name\": \"text1\",</p>\n<p>      \"onMouseUp\": \"sun1.opacity = (sun1.opacity / 100) * 90;\",</p>\n<p>      \"size\": 36,</p>\n<p>      \"style\": \"bold\",</p>\n<p>      \"vOffset\": 100</p>\n<p>    },</p>\n<p>    \"window\": {</p>\n<p>      \"height\": 500,</p>\n<p>      \"name\": \"main_window\",</p>\n<p>      \"title\": \"Sample Konfabulator Widget\",</p>\n<p>      \"width\": 500</p>\n<p>    }</p>\n<p>  }</p>\n<p>}</p>",
     "name": "Field",
-    "rect": "0,32,509,424",
+    "rect": "0,32,1001,793",
     "scrollbarWidth": "16",
     "style": "scrolling",
     "textAlign": "left",

@@ -16,14 +16,11 @@
   "properties": {
     "armBorder": "false",
     "autoHilite": "false",
-    "menuHistory": "3",
     "menuMode": "option",
     "name": "tests",
     "rect": "98,5,200,27",
     "style": "menu",
     "textAlign": "center",
-    "traversalOn": "false",
-    "unicodeLabel": "3",
-    "unicodeText": "1\n2\n3\n4\n5\n6"
+    "traversalOn": "false"
   }
 }

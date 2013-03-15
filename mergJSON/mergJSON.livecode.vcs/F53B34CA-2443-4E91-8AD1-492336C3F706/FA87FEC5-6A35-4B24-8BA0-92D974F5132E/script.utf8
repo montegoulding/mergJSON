@@ -1,3 +1,7 @@
 on menuPick pItemName
    send menuPick&&the label of btn "tests" to btn "tests"
 end menuPick
+
+on lcVCSExport
+   set the label of me to empty
+end lcVCSExport

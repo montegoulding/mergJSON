@@ -1,3 +1,7 @@
 on mouseUp
    send menuPick&&the label of btn "tests" to btn "tests"
 end mouseUp
+
+on lcVCSExport
+   set the hilte of me to true
+end lcVCSExport
