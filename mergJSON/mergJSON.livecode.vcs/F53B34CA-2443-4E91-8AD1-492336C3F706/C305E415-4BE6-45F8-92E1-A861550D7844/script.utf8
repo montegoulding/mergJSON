@@ -3,5 +3,5 @@ on mouseUp
 end mouseUp
 
 on lcVCSExport
-   set the hilte of me to true
+   set the hilite of me to true
 end lcVCSExport
