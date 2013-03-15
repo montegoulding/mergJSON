@@ -5,6 +5,8 @@ function ArrayToJSON pArray,pForceRootType,pPretty
    repeat for each key tKey in pArray
       if pArray[tKey] is an array then
          put "}"&ArrayToJSON(pArray[tKey],pForceRootType) into pArray[tKey]
+      else if char 1 of pArray[tKey] = "}" then
+         put "}}" before pArray[tKey]
       end if
    end repeat
    return(mergJSONEncode("pArray",pForceRootType,pPretty))
@@ -19,5 +21,7 @@ function JSONToArray pJSON
 end JSONToArray
 
 on lcVCSExport
-   set the rect of this stack to 100,100,600,600
+   if the target is me then
+      set the rect of this stack to 100,100,600,600
+   end if
 end lcVCSExport

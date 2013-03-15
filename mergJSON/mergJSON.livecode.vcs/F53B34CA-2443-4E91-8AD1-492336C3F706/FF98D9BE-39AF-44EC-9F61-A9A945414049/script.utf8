@@ -3,7 +3,6 @@ on menuPick pItemName
    put JSONToArray(the tests[pItemName] of me) into tArray
    put the milliseconds-tSecs into tDecode
    put the milliseconds into tSecs
-   put "}}" before tArray["widget"]["image"]["hOffset"]
    put ArrayToJSON(tArray,the label of btn "force",the hilite of btn "pretty") into tJSON
    put "decode:"&tDecode&&"encode:"&the milliseconds-tSecs
    put tJSON into fld 1
