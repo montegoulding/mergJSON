@@ -16,3 +16,4 @@ end mouseDown
 on lcVCSExport
    set the text of me to empty
 end lcVCSExport
+

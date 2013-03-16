@@ -130,7 +130,9 @@ json_t * getPrimitiveJSON(char * tString,const char * tForceType) {
 LIVECODE_FUNCTION(mergJSONEncode)
 {
     int i;
-    // one parameter: Array or variable to encode
+    // parameter 1: Array or variable to encode
+    // parameter 2 (optional): Object type for forcing {"object"|"string") - any other value will let the external work out how to encode the values
+    // parameter 3 (optional): PrettyPrint {true|false}
     LIVECODE_ARG(1);
     
     char * tForceType = NULL;
@@ -300,7 +302,7 @@ LIVECODE_FUNCTION(mergJSONEncode)
 
 LIVECODE_FUNCTION(mergJSONDecode)
 {
-    // three parameters: JSON to decode, variable name to place the result, variable name to place keys to be expanded
+    // two parameters: JSON to decode, variable name to place the result
     LIVECODE_ARG(2);
     
     int i;
