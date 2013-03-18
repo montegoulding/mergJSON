@@ -2,24 +2,26 @@
   "class": "com.runrev.engine.field",
   "customPropertySets": {
     "cREVGeneral": {
-      "revUniqueID": "1363237249897"
+      "revUniqueID": "1359318518158"
     },
     "cREVTable": {
-      "currentview": "force"
+      "currentview": "Test Cases"
     }
   },
   "properties": {
     "autoHilite": "false",
     "dontWrap": "true",
-    "htmlText": "<p>force</p>",
+    "htmlText": "<p>Test Cases</p>",
+    "layer": "4",
     "lockText": "true",
     "name": "Label Field",
     "opaque": "false",
-    "rect": "288,4,342,26",
+    "rect": "0,4,100,25",
     "sharedText": "true",
     "showBorder": "false",
     "style": "transparent",
     "textAlign": "right",
     "traversalOn": "false"
-  }
+  },
+  "uuid": "3E8CA691-475F-42B2-A13A-DB745E5AFCAB"
 }

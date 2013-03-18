@@ -26,11 +26,12 @@
   },
   "properties": {
     "hScrollbar": "true",
+    "layer": "1",
     "name": "Field",
     "rect": "0,32,1001,793",
     "scrollbarWidth": "16",
     "style": "scrolling",
-    "textAlign": "left",
     "vScrollbar": "true"
-  }
+  },
+  "uuid": "C1BFD4B1-CE40-48BD-8F85-A47130F12C4C"
 }

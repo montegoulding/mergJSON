@@ -16,11 +16,12 @@
   "properties": {
     "armBorder": "false",
     "autoHilite": "false",
+    "layer": "2",
     "menuMode": "option",
     "name": "tests",
     "rect": "98,5,200,27",
     "style": "menu",
-    "textAlign": "center",
     "traversalOn": "false"
-  }
+  },
+  "uuid": "FF98D9BE-39AF-44EC-9F61-A9A945414049"
 }

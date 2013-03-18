@@ -8,11 +8,13 @@
   "properties": {
     "hiliteBorder": "false",
     "hilited": "true",
+    "layer": "3",
     "name": "Pretty",
     "opaque": "false",
     "rect": "218,4,300,27",
     "showBorder": "false",
     "style": "checkbox",
     "textAlign": "left"
-  }
+  },
+  "uuid": "C305E415-4BE6-45F8-92E1-A861550D7844"
 }
