@@ -306,7 +306,7 @@ Bool SecurityCanAccessLibrary(const char *p_library)
 	return True;
 }
 
-#ifdef TARGET_OS_IPHONE
+#if __IPHONE_OS_VERSION_MIN_REQUIRED
 struct LibExport
 {
 	const char *name;
