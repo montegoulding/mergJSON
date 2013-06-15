@@ -423,3 +423,8 @@ EXTERNAL_BEGIN_DECLARATIONS("mergJSON")
 EXTERNAL_DECLARE_FUNCTION("mergJSONEncode", mergJSONEncode)
 EXTERNAL_DECLARE_FUNCTION("mergJSONDecode", mergJSONDecode)
 EXTERNAL_END_DECLARATIONS
+
+#if __IPHONE_OS_VERSION_MIN_REQUIRED
+extern struct LibInfo __libinfo;
+__attribute((section("__DATA,__libs"))) volatile struct LibInfo *__libinfoptr_mergJSON = &__libinfo;
+#endif

@@ -1,11 +1,3 @@
-//
-//  external.c
-//  clpboard
-//
-//  Created by Monte Goulding on 9/01/13.
-//  Copyright (c) 2013 dotcomsolutions. All rights reserved.
-//
-
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -45,14 +37,30 @@ enum
 	OPERATION_SET_ARRAY
 };
 
+enum
+{
+	SECURITY_CHECK_FILE,
+	SECURITY_CHECK_HOST,
+	SECURITY_CHECK_LIBRARY
+};
+
 typedef char *(*ExternalOperationCallback)(const char *p_arg_1, const char *p_arg_2, const char *p_arg_3, int *r_success);
 typedef void (*ExternalDeleteCallback)(void *p_block);
+
+typedef Bool (*ExternalSecurityHandler)(const char *p_op);
 
 extern const char *g_external_name;
 extern ExternalDeclaration g_external_table[];
 
-static ExternalOperationCallback *s_operations;
-static ExternalDeleteCallback s_delete;
+static ExternalOperationCallback *s_operations = NULL;
+static ExternalDeleteCallback s_delete = NULL;
+
+static ExternalSecurityHandler *s_security_handlers = NULL;
+
+#if defined(_LINUX) || defined(__MACOSX) || defined(__ANDROID__)
+void getXtable(ExternalOperationCallback p_operations[], ExternalDeleteCallback p_delete, const char **r_name, ExternalDeclaration **r_table, ExternalDeleteCallback *r_external_delete) __attribute__((visibility("default")));
+void configureSecurity(ExternalSecurityHandler *p_handlers) __attribute__((visibility("default")));
+#endif
 
 void LIBRARY_EXPORT getXtable(ExternalOperationCallback p_operations[],
                               ExternalDeleteCallback p_delete,
@@ -65,6 +73,11 @@ void LIBRARY_EXPORT getXtable(ExternalOperationCallback p_operations[],
 	*r_name = g_external_name;
 	*r_table = g_external_table;
 	*r_external_delete = free;
+}
+
+void LIBRARY_EXPORT configureSecurity(ExternalSecurityHandler *p_handlers)
+{
+	s_security_handlers = p_handlers;
 }
 
 static char *retstr(char *p_string)
@@ -115,6 +128,7 @@ void SetGlobal(const char *p_name, const char *p_value, int *r_success)
 char *GetFieldByName(const char *p_group, const char *p_name, int *r_success)
 {
 	char *t_result;
+	// MDW-2013-05-08 : fix for bug 7913
 	t_result = (s_operations[OPERATION_GET_FIELD_BY_NAME])(p_name, p_group, NULL, r_success);
 	return retstr(t_result);
 }
@@ -123,7 +137,7 @@ char *GetFieldByNum(const char *p_group, int p_index, int *r_success)
 {
 	char t_index_str[16];
 	char *t_result;
-    
+	
 	sprintf(t_index_str, "%d", p_index);
 	t_result = (s_operations[OPERATION_GET_FIELD_BY_NUM])(t_index_str, p_group, NULL, r_success);
     
@@ -144,6 +158,7 @@ char *GetFieldById(const char *p_group, unsigned long p_id, int *r_success)
 void SetFieldByName(const char *p_group, const char *p_name, const char *p_value, int *r_success)
 {
 	char *t_result;
+	// MDW-2013-05-08 : fix for bug 7913
 	t_result = (s_operations[OPERATION_SET_FIELD_BY_NAME])(p_name, p_group, p_value, r_success);
 	if (t_result != NULL)
 		(s_delete)(t_result);
@@ -174,6 +189,7 @@ void SetFieldById(const char *p_group, unsigned long p_id, const char *p_value, 
 void ShowImageByName(const char *p_group, const char *p_name, int *r_success)
 {
 	char *t_result;
+	// MDW-2013-05-08 : fix for bug 7913
 	t_result = (s_operations[OPERATION_SHOW_IMAGE_BY_NAME])(p_name, p_group, NULL, r_success);
 	if (t_result != NULL)
 		(s_delete)(t_result);
@@ -197,6 +213,14 @@ void ShowImageById(const char *p_group, unsigned long p_id, int *r_success)
     
 	sprintf(t_index_str, "%ld", p_id);
 	t_result = (s_operations[OPERATION_SHOW_IMAGE_BY_ID])(t_index_str, p_group, NULL, r_success);
+	if (t_result != NULL)
+		s_delete(t_result);
+}
+
+void ShowImageByLongId(const char *p_long_id, int *r_success)
+{
+	char *t_result;
+	t_result = (s_operations[OPERATION_SHOW_IMAGE_BY_ID])(p_long_id, "false", NULL, r_success);
 	if (t_result != NULL)
 		s_delete(t_result);
 }
@@ -260,3 +284,51 @@ void SetArray(const char *p_name, int p_element_count, ExternalString *p_values,
 	if (t_result != NULL)
 		s_delete(t_result);
 }
+
+Bool SecurityCanAccessFile(const char *p_file)
+{
+	if (s_security_handlers != NULL)
+		return s_security_handlers[SECURITY_CHECK_FILE](p_file);
+	return True;
+}
+
+Bool SecurityCanAccessHost(const char *p_host)
+{
+	if (s_security_handlers != NULL)
+		return s_security_handlers[SECURITY_CHECK_HOST](p_host);
+	return True;
+}
+
+Bool SecurityCanAccessLibrary(const char *p_library)
+{
+	if (s_security_handlers != NULL)
+		return s_security_handlers[SECURITY_CHECK_LIBRARY](p_library);
+	return True;
+}
+
+#if __IPHONE_OS_VERSION_MIN_REQUIRED
+struct LibExport
+{
+	const char *name;
+	void *address;
+};
+
+struct LibInfo
+{
+	const char **name;
+	struct LibExport *exports;
+};
+
+static struct LibExport __libexports[] =
+{
+	{ "getXtable", getXtable },
+	{ "configureSecurity", configureSecurity },
+	{ 0, 0 }
+};
+
+struct LibInfo __libinfo =
+{
+	&g_external_name,
+	__libexports
+};
+#endif

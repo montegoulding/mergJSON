@@ -8,6 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		B262C13516B3F772002D4FEC /* external.c in Sources */ = {isa = PBXBuildFile; fileRef = B262C13316B3F772002D4FEC /* external.c */; };
+		B2662DBD17684D1100E9A174 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2662DBC17684D1100E9A174 /* Foundation.framework */; };
+		B2662DE217684D8900E9A174 /* dump.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECA916EC9C2F005E495C /* dump.c */; };
+		B2662DE317684D8900E9A174 /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECAA16EC9C2F005E495C /* error.c */; };
+		B2662DE417684D8900E9A174 /* hashtable.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECAB16EC9C2F005E495C /* hashtable.c */; };
+		B2662DE517684D8900E9A174 /* load.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECAC16EC9C2F005E495C /* load.c */; };
+		B2662DE617684D8900E9A174 /* memory.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECAD16EC9C2F005E495C /* memory.c */; };
+		B2662DE717684D8900E9A174 /* pack_unpack.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECAE16EC9C2F005E495C /* pack_unpack.c */; };
+		B2662DE817684D8900E9A174 /* strbuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECAF16EC9C2F005E495C /* strbuffer.c */; };
+		B2662DE917684D8900E9A174 /* strconv.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECB016EC9C2F005E495C /* strconv.c */; };
+		B2662DEA17684D8900E9A174 /* utf.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECB116EC9C2F005E495C /* utf.c */; };
+		B2662DEB17684D8900E9A174 /* value.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECB216EC9C2F005E495C /* value.c */; };
+		B2662DEC17684D8900E9A174 /* mergJSON.c in Sources */ = {isa = PBXBuildFile; fileRef = B285232F16B3FBF500159A3F /* mergJSON.c */; };
+		B2662DED17684D8900E9A174 /* external.c in Sources */ = {isa = PBXBuildFile; fileRef = B262C13316B3F772002D4FEC /* external.c */; };
 		B285233016B3FBF500159A3F /* mergJSON.c in Sources */ = {isa = PBXBuildFile; fileRef = B285232F16B3FBF500159A3F /* mergJSON.c */; };
 		B28F3C9716B3F5E1009D2F35 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B28F3C9516B3F5E1009D2F35 /* InfoPlist.strings */; };
 		B2FFECB316EC9C2F005E495C /* dump.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECA916EC9C2F005E495C /* dump.c */; };
@@ -22,6 +35,18 @@
 		B2FFECBC16EC9C2F005E495C /* value.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECB216EC9C2F005E495C /* value.c */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		B2662DB917684D1100E9A174 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		B22BC37D16EF3B8D00865342 /* jansson_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = jansson_config.h; sourceTree = "<group>"; };
 		B22BC38016EF3DF200865342 /* jansson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; name = jansson.h; path = mergJSON/jansson/src/jansson.h; sourceTree = "<group>"; };
@@ -31,6 +56,10 @@
 		B22BC38416EF3DF200865342 /* utf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; name = utf.h; path = mergJSON/jansson/src/utf.h; sourceTree = "<group>"; };
 		B262C13316B3F772002D4FEC /* external.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = external.c; sourceTree = "<group>"; };
 		B262C13416B3F772002D4FEC /* external.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = external.h; sourceTree = "<group>"; };
+		B2662DBB17684D1100E9A174 /* libmergJSON.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmergJSON.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2662DBC17684D1100E9A174 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B2662DCB17684D1100E9A174 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		B2662DCD17684D1100E9A174 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		B285232F16B3FBF500159A3F /* mergJSON.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mergJSON.c; sourceTree = "<group>"; };
 		B28F3C8D16B3F5E1009D2F35 /* mergJSON.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mergJSON.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		B28F3C9016B3F5E1009D2F35 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -50,6 +79,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B2662DB817684D1100E9A174 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2662DBD17684D1100E9A174 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B28F3C8A16B3F5E1009D2F35 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -96,6 +133,7 @@
 			children = (
 				B28F3C8D16B3F5E1009D2F35 /* mergJSON.bundle */,
 				B2DA6F6016BFB43C00B476A5 /* libmergExt.a */,
+				B2662DBB17684D1100E9A174 /* libmergJSON.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -104,6 +142,9 @@
 			isa = PBXGroup;
 			children = (
 				B28F3C9016B3F5E1009D2F35 /* CoreFoundation.framework */,
+				B2662DBC17684D1100E9A174 /* Foundation.framework */,
+				B2662DCB17684D1100E9A174 /* SenTestingKit.framework */,
+				B2662DCD17684D1100E9A174 /* UIKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -142,6 +183,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		B2662DBA17684D1100E9A174 /* mergJSON-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B2662DE017684D1100E9A174 /* Build configuration list for PBXNativeTarget "mergJSON-iOS" */;
+			buildPhases = (
+				B2662DB717684D1100E9A174 /* Sources */,
+				B2662DB817684D1100E9A174 /* Frameworks */,
+				B2662DB917684D1100E9A174 /* CopyFiles */,
+				B2662DEE17684EBB00E9A174 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "mergJSON-iOS";
+			productName = "mergJSON-iOS";
+			productReference = B2662DBB17684D1100E9A174 /* libmergJSON.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		B28F3C8C16B3F5E1009D2F35 /* mergJSON */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B28F3C9B16B3F5E1009D2F35 /* Build configuration list for PBXNativeTarget "mergJSON" */;
@@ -200,6 +259,7 @@
 			targets = (
 				B28F3C8C16B3F5E1009D2F35 /* mergJSON */,
 				B2DA6F5F16BFB43C00B476A5 /* mergExt */,
+				B2662DBA17684D1100E9A174 /* mergJSON-iOS */,
 			);
 		};
 /* End PBXProject section */
@@ -229,9 +289,41 @@
 			shellPath = /bin/sh;
 			shellScript = "cp -r \"$BUILT_PRODUCTS_DIR/$EXECUTABLE_NAME.bundle\" \"/Users/montegoulding/Dropbox/LiveCode/Externals\"\nopen \"$SRCROOT/$EXECUTABLE_NAME/$EXECUTABLE_NAME.livecode\"";
 		};
+		B2662DEE17684EBB00E9A174 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "export SYMBOLS=_getXtable\nsh \"$LIVECODE_SDKROOT/tools/lclink.sh\"";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B2662DB717684D1100E9A174 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2662DE217684D8900E9A174 /* dump.c in Sources */,
+				B2662DE317684D8900E9A174 /* error.c in Sources */,
+				B2662DE417684D8900E9A174 /* hashtable.c in Sources */,
+				B2662DE517684D8900E9A174 /* load.c in Sources */,
+				B2662DE617684D8900E9A174 /* memory.c in Sources */,
+				B2662DE717684D8900E9A174 /* pack_unpack.c in Sources */,
+				B2662DE817684D8900E9A174 /* strbuffer.c in Sources */,
+				B2662DE917684D8900E9A174 /* strconv.c in Sources */,
+				B2662DEA17684D8900E9A174 /* utf.c in Sources */,
+				B2662DEB17684D8900E9A174 /* value.c in Sources */,
+				B2662DEC17684D8900E9A174 /* mergJSON.c in Sources */,
+				B2662DED17684D8900E9A174 /* external.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B28F3C8916B3F5E1009D2F35 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -272,6 +364,45 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		B2662DDC17684D1100E9A174 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = armv7;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				DSTROOT = /tmp/mergJSON_iOS.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = mergJSON;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		B2662DDD17684D1100E9A174 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = armv7;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				DSTROOT = /tmp/mergJSON_iOS.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = mergJSON;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		B28F3C9916B3F5E1009D2F35 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -295,6 +426,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIVECODE_SDKROOT = "$(USER_LIBRARY_DIR)/Application Support/RunRev/Components/LiveCodeSDK";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -318,6 +450,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIVECODE_SDKROOT = "$(USER_LIBRARY_DIR)/Application Support/RunRev/Components/LiveCodeSDK";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SDKROOT = macosx;
 			};
@@ -380,6 +513,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B2662DE017684D1100E9A174 /* Build configuration list for PBXNativeTarget "mergJSON-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B2662DDC17684D1100E9A174 /* Debug */,
+				B2662DDD17684D1100E9A174 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		B28F3C8716B3F5E1009D2F35 /* Build configuration list for PBXProject "mergJSON" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
