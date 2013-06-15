@@ -22,3 +22,7 @@ DerivedData
 # Binaries
 *.dll
 *.so
+*.lcext
+*.dylib
+binaries
+_build
