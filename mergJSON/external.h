@@ -609,3 +609,8 @@ template<ExternalHandler u_handler> void ExternalWrapperObjC(char *p_arguments[]
 #endif
 
 #endif
+
+#define EXTERNAL_LIBINFO(m_name) \
+extern struct LibInfo __libinfo; \
+__attribute((section("__DATA,__libs"))) volatile struct LibInfo *__libinfoptr_##m_name = &__libinfo;
+

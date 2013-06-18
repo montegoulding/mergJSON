@@ -43,7 +43,7 @@ else { *r_result = x; }}
 
 /* calling function must free the return val */
 char * getPrimitiveString(json_t * tJSON) {
-    char * tReturn;
+    char * tReturn = NULL;
     switch (json_typeof(tJSON))
     {
         case JSON_TRUE:
@@ -425,6 +425,5 @@ EXTERNAL_DECLARE_FUNCTION("mergJSONDecode", mergJSONDecode)
 EXTERNAL_END_DECLARATIONS
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED
-extern struct LibInfo __libinfo;
-__attribute((section("__DATA,__libs"))) volatile struct LibInfo *__libinfoptr_mergJSON = &__libinfo;
+   EXTERNAL_LIBINFO(mergJSON)
 #endif

@@ -23,6 +23,18 @@
 		B2662DED17684D8900E9A174 /* external.c in Sources */ = {isa = PBXBuildFile; fileRef = B262C13316B3F772002D4FEC /* external.c */; };
 		B285233016B3FBF500159A3F /* mergJSON.c in Sources */ = {isa = PBXBuildFile; fileRef = B285232F16B3FBF500159A3F /* mergJSON.c */; };
 		B28F3C9716B3F5E1009D2F35 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B28F3C9516B3F5E1009D2F35 /* InfoPlist.strings */; };
+		B2B54CA7176EAD490047920A /* dump.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECA916EC9C2F005E495C /* dump.c */; };
+		B2B54CA8176EAD490047920A /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECAA16EC9C2F005E495C /* error.c */; };
+		B2B54CA9176EAD490047920A /* hashtable.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECAB16EC9C2F005E495C /* hashtable.c */; };
+		B2B54CAA176EAD490047920A /* load.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECAC16EC9C2F005E495C /* load.c */; };
+		B2B54CAB176EAD490047920A /* memory.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECAD16EC9C2F005E495C /* memory.c */; };
+		B2B54CAC176EAD490047920A /* pack_unpack.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECAE16EC9C2F005E495C /* pack_unpack.c */; };
+		B2B54CAD176EAD490047920A /* strbuffer.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECAF16EC9C2F005E495C /* strbuffer.c */; };
+		B2B54CAE176EAD490047920A /* strconv.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECB016EC9C2F005E495C /* strconv.c */; };
+		B2B54CAF176EAD490047920A /* utf.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECB116EC9C2F005E495C /* utf.c */; };
+		B2B54CB0176EAD490047920A /* value.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECB216EC9C2F005E495C /* value.c */; };
+		B2B54CB1176EAD4E0047920A /* mergJSON.c in Sources */ = {isa = PBXBuildFile; fileRef = B285232F16B3FBF500159A3F /* mergJSON.c */; };
+		B2B54CB2176EAD4E0047920A /* external.c in Sources */ = {isa = PBXBuildFile; fileRef = B262C13316B3F772002D4FEC /* external.c */; };
 		B2FFECB316EC9C2F005E495C /* dump.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECA916EC9C2F005E495C /* dump.c */; };
 		B2FFECB416EC9C2F005E495C /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECAA16EC9C2F005E495C /* error.c */; };
 		B2FFECB516EC9C2F005E495C /* hashtable.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECAB16EC9C2F005E495C /* hashtable.c */; };
@@ -65,7 +77,7 @@
 		B28F3C9016B3F5E1009D2F35 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		B28F3C9416B3F5E1009D2F35 /* mergJSON-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "mergJSON-Info.plist"; sourceTree = "<group>"; };
 		B28F3C9616B3F5E1009D2F35 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		B2DA6F6016BFB43C00B476A5 /* libmergExt.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmergExt.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2B54CA3176EAD1C0047920A /* mergJSON.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = mergJSON.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2FFECA916EC9C2F005E495C /* dump.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dump.c; path = mergJSON/jansson/src/dump.c; sourceTree = "<group>"; };
 		B2FFECAA16EC9C2F005E495C /* error.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = error.c; path = mergJSON/jansson/src/error.c; sourceTree = "<group>"; };
 		B2FFECAB16EC9C2F005E495C /* hashtable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = hashtable.c; path = mergJSON/jansson/src/hashtable.c; sourceTree = "<group>"; };
@@ -94,7 +106,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B2DA6F5D16BFB43C00B476A5 /* Frameworks */ = {
+		B2B54CA0176EAD1C0047920A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -132,8 +144,8 @@
 			isa = PBXGroup;
 			children = (
 				B28F3C8D16B3F5E1009D2F35 /* mergJSON.bundle */,
-				B2DA6F6016BFB43C00B476A5 /* libmergExt.a */,
 				B2662DBB17684D1100E9A174 /* libmergJSON.a */,
+				B2B54CA3176EAD1C0047920A /* mergJSON.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -173,7 +185,7 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		B2DA6F5E16BFB43C00B476A5 /* Headers */ = {
+		B2B54CA1176EAD1C0047920A /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -219,22 +231,23 @@
 			productReference = B28F3C8D16B3F5E1009D2F35 /* mergJSON.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
-		B2DA6F5F16BFB43C00B476A5 /* mergExt */ = {
+		B2B54CA2176EAD1C0047920A /* mergJSON-Server */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B2DA6F6316BFB43C00B476A5 /* Build configuration list for PBXNativeTarget "mergExt" */;
+			buildConfigurationList = B2B54CA4176EAD1C0047920A /* Build configuration list for PBXNativeTarget "mergJSON-Server" */;
 			buildPhases = (
-				B2DA6F5C16BFB43C00B476A5 /* Sources */,
-				B2DA6F5D16BFB43C00B476A5 /* Frameworks */,
-				B2DA6F5E16BFB43C00B476A5 /* Headers */,
+				B2B54C9F176EAD1C0047920A /* Sources */,
+				B2B54CA0176EAD1C0047920A /* Frameworks */,
+				B2B54CA1176EAD1C0047920A /* Headers */,
+				B2B54CB4176EAF490047920A /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = mergExt;
-			productName = mergExt;
-			productReference = B2DA6F6016BFB43C00B476A5 /* libmergExt.a */;
-			productType = "com.apple.product-type.library.static";
+			name = "mergJSON-Server";
+			productName = "mergJSON-Server";
+			productReference = B2B54CA3176EAD1C0047920A /* mergJSON.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
 
@@ -258,8 +271,8 @@
 			projectRoot = "";
 			targets = (
 				B28F3C8C16B3F5E1009D2F35 /* mergJSON */,
-				B2DA6F5F16BFB43C00B476A5 /* mergExt */,
 				B2662DBA17684D1100E9A174 /* mergJSON-iOS */,
+				B2B54CA2176EAD1C0047920A /* mergJSON-Server */,
 			);
 		};
 /* End PBXProject section */
@@ -287,7 +300,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp -r \"$BUILT_PRODUCTS_DIR/$EXECUTABLE_NAME.bundle\" \"/Users/montegoulding/Dropbox/LiveCode/Externals\"\nopen \"$SRCROOT/$EXECUTABLE_NAME/$EXECUTABLE_NAME.livecode\"";
+			shellScript = "cp -r \"$BUILT_PRODUCTS_DIR/$EXECUTABLE_NAME.bundle\" \"$SRCROOT/binaries\"\ncp -r \"$BUILT_PRODUCTS_DIR/$EXECUTABLE_NAME.bundle\" \"/Users/montegoulding/Dropbox/LiveCode/Externals\"\nopen \"$SRCROOT/$EXECUTABLE_NAME/$EXECUTABLE_NAME.livecode\"";
 		};
 		B2662DEE17684EBB00E9A174 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -301,6 +314,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = "export SYMBOLS=_getXtable\nsh \"$LIVECODE_SDKROOT/tools/lclink.sh\"";
+		};
+		B2B54CB4176EAF490047920A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "cp \"$BUILT_PRODUCTS_DIR/$EXECUTABLE_NAME\" \"$SRCROOT/binaries/$EXECUTABLE_NAME\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -343,10 +369,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B2DA6F5C16BFB43C00B476A5 /* Sources */ = {
+		B2B54C9F176EAD1C0047920A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2B54CA7176EAD490047920A /* dump.c in Sources */,
+				B2B54CA8176EAD490047920A /* error.c in Sources */,
+				B2B54CA9176EAD490047920A /* hashtable.c in Sources */,
+				B2B54CAA176EAD490047920A /* load.c in Sources */,
+				B2B54CAB176EAD490047920A /* memory.c in Sources */,
+				B2B54CAC176EAD490047920A /* pack_unpack.c in Sources */,
+				B2B54CAD176EAD490047920A /* strbuffer.c in Sources */,
+				B2B54CAE176EAD490047920A /* strconv.c in Sources */,
+				B2B54CAF176EAD490047920A /* utf.c in Sources */,
+				B2B54CB0176EAD490047920A /* value.c in Sources */,
+				B2B54CB1176EAD4E0047920A /* mergJSON.c in Sources */,
+				B2B54CB2176EAD4E0047920A /* external.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,6 +418,7 @@
 				PRODUCT_NAME = mergJSON;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SYMROOT = build;
 			};
 			name = Debug;
 		};
@@ -399,6 +438,7 @@
 				PRODUCT_NAME = mergJSON;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SYMROOT = build;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -430,6 +470,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				SYMROOT = build;
 			};
 			name = Debug;
 		};
@@ -453,6 +494,7 @@
 				LIVECODE_SDKROOT = "$(USER_LIBRARY_DIR)/Application Support/RunRev/Components/LiveCodeSDK";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SDKROOT = macosx;
+				SYMROOT = build;
 			};
 			name = Release;
 		};
@@ -492,21 +534,31 @@
 			};
 			name = Release;
 		};
-		B2DA6F6116BFB43C00B476A5 /* Debug */ = {
+		B2B54CA5176EAD1C0047920A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				EXECUTABLE_PREFIX = lib;
-				HEADER_SEARCH_PATHS = "\"$SRCROOT/jansson/src/**";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				EXECUTABLE_PREFIX = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_NAME = mergJSON;
 			};
 			name = Debug;
 		};
-		B2DA6F6216BFB43C00B476A5 /* Release */ = {
+		B2B54CA6176EAD1C0047920A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				EXECUTABLE_PREFIX = lib;
-				HEADER_SEARCH_PATHS = "\"$SRCROOT/jansson/src/**";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				EXECUTABLE_PREFIX = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_NAME = mergJSON;
 			};
 			name = Release;
 		};
@@ -520,6 +572,7 @@
 				B2662DDD17684D1100E9A174 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B28F3C8716B3F5E1009D2F35 /* Build configuration list for PBXProject "mergJSON" */ = {
 			isa = XCConfigurationList;
@@ -539,11 +592,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B2DA6F6316BFB43C00B476A5 /* Build configuration list for PBXNativeTarget "mergExt" */ = {
+		B2B54CA4176EAD1C0047920A /* Build configuration list for PBXNativeTarget "mergJSON-Server" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B2DA6F6116BFB43C00B476A5 /* Debug */,
-				B2DA6F6216BFB43C00B476A5 /* Release */,
+				B2B54CA5176EAD1C0047920A /* Debug */,
+				B2B54CA6176EAD1C0047920A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
