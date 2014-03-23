@@ -1,0 +1,7 @@
+on mouseUp
+   open socket to "192.168.2.6:8009" with message "hi"
+end mouseUp
+
+on hi pID
+   answer pID
+end hi

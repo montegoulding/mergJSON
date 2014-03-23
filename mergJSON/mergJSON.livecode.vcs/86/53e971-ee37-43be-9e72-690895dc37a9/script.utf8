@@ -1,0 +1,11 @@
+on mouseUp
+   try
+      accept connections on port 8009 with message "helloWorld"
+   catch e
+      answer e
+   end try
+end mouseUp
+
+on helloWorld pID
+   answer "hi"&&pID
+end helloWorld

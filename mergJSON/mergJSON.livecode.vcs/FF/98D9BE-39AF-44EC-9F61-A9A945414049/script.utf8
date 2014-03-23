@@ -5,7 +5,7 @@ on menuPick pItemName
    put the milliseconds into tSecs
    put ArrayToJSON(tArray,the label of btn "force",the hilite of btn "pretty") into tJSON
    put "decode:"&tDecode&&"encode:"&the milliseconds-tSecs
-   put tJSON into fld 1
+   put tJSON into fld "out"
 end menuPick
 
 on mouseDown
@@ -16,3 +16,4 @@ end mouseDown
 on lcVCSExport
    set the text of me to empty
 end lcVCSExport
+

@@ -1,0 +1,16 @@
+{
+  "build path": "",
+  "name": "mergJSON",
+  "plugins": [
+    "cRevGeneral",
+    "cREVGeometryCache",
+    "cRevStandaloneSettings",
+    "dataviewProps",
+    "dgProps",
+    "GLX2"
+  ],
+  "resource paths": "",
+  "stackFiles": [
+    "mergJSON.livecode"
+  ]
+}

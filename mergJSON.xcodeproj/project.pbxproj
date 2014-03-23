@@ -213,9 +213,9 @@
 			productReference = B2662DBB17684D1100E9A174 /* libmergJSON.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		B28F3C8C16B3F5E1009D2F35 /* mergJSON */ = {
+		B28F3C8C16B3F5E1009D2F35 /* mergJSON-OSX */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B28F3C9B16B3F5E1009D2F35 /* Build configuration list for PBXNativeTarget "mergJSON" */;
+			buildConfigurationList = B28F3C9B16B3F5E1009D2F35 /* Build configuration list for PBXNativeTarget "mergJSON-OSX" */;
 			buildPhases = (
 				B28F3C8916B3F5E1009D2F35 /* Sources */,
 				B28F3C8A16B3F5E1009D2F35 /* Frameworks */,
@@ -226,7 +226,7 @@
 			);
 			dependencies = (
 			);
-			name = mergJSON;
+			name = "mergJSON-OSX";
 			productName = mergJSON;
 			productReference = B28F3C8D16B3F5E1009D2F35 /* mergJSON.bundle */;
 			productType = "com.apple.product-type.bundle";
@@ -270,7 +270,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B28F3C8C16B3F5E1009D2F35 /* mergJSON */,
+				B28F3C8C16B3F5E1009D2F35 /* mergJSON-OSX */,
 				B2662DBA17684D1100E9A174 /* mergJSON-iOS */,
 				B2B54CA2176EAD1C0047920A /* mergJSON-Server */,
 			);
@@ -300,7 +300,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp -r \"$BUILT_PRODUCTS_DIR/$EXECUTABLE_NAME.bundle\" \"$SRCROOT/binaries\"\ncp -r \"$BUILT_PRODUCTS_DIR/$EXECUTABLE_NAME.bundle\" \"/Users/montegoulding/Dropbox/LiveCode/Externals\"\nopen \"$SRCROOT/$EXECUTABLE_NAME/$EXECUTABLE_NAME.livecode\"";
+			shellScript = "cp -r \"$BUILT_PRODUCTS_DIR/$EXECUTABLE_NAME.bundle\" \"$SRCROOT/binaries\"\ncp -r \"$BUILT_PRODUCTS_DIR/$EXECUTABLE_NAME.bundle\" \"$SRCROOT/distribute\"\ncp -r \"$BUILT_PRODUCTS_DIR/$EXECUTABLE_NAME.bundle\" \"/Users/montegoulding/Dropbox/LiveCode/Externals\"\nopen \"$SRCROOT/$EXECUTABLE_NAME/$EXECUTABLE_NAME.livecode\"";
 		};
 		B2662DEE17684EBB00E9A174 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -326,7 +326,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp \"$BUILT_PRODUCTS_DIR/$EXECUTABLE_NAME\" \"$SRCROOT/binaries/$EXECUTABLE_NAME\"";
+			shellScript = "cp \"$BUILT_PRODUCTS_DIR/$EXECUTABLE_NAME\" \"$SRCROOT/binaries/$EXECUTABLE_NAME\"\ncp \"$BUILT_PRODUCTS_DIR/$EXECUTABLE_NAME\" \"$SRCROOT/distribute\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -447,7 +447,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -478,7 +478,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -506,12 +506,15 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				HEADER_SEARCH_PATHS = /Users/montegoulding/jansson/src;
 				INFOPLIST_FILE = "mergJSON/mergJSON-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = mergJSON;
+				SDKROOT = macosx;
+				VALID_ARCHS = "i386 x86_64 ppc";
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
@@ -524,12 +527,15 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				HEADER_SEARCH_PATHS = /Users/montegoulding/jansson/src;
 				INFOPLIST_FILE = "mergJSON/mergJSON-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = mergJSON;
+				SDKROOT = macosx;
+				VALID_ARCHS = "i386 x86_64 ppc";
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;
@@ -583,7 +589,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B28F3C9B16B3F5E1009D2F35 /* Build configuration list for PBXNativeTarget "mergJSON" */ = {
+		B28F3C9B16B3F5E1009D2F35 /* Build configuration list for PBXNativeTarget "mergJSON-OSX" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B28F3C9C16B3F5E1009D2F35 /* Debug */,

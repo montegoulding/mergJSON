@@ -27,3 +27,8 @@ DerivedData
 binaries
 _build
 build
+buildlog.txt
+dual
+distribute
+*.tmp
+*.zip

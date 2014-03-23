@@ -1,0 +1,9 @@
+on mouseUp
+   put the milliseconds into tSecs
+   put JSONToArray(the tests[random(6)] of btn "tests") into tArray
+   put the milliseconds-tSecs into tDecode
+   put the milliseconds into tSecs
+   put ArrayToJSON(tArray,the label of btn "force",the hilite of btn "pretty") into tJSON
+   put "decode:"&tDecode&&"encode:"&the milliseconds-tSecs
+   put tJSON into fld "out"
+end mouseUp
