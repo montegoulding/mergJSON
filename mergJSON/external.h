@@ -423,13 +423,7 @@ extern "C"
     extern void ShowImageByName(const char *p_group, const char *p_name, int *r_success);
     extern void ShowImageByNum(const char *p_group, int p_index, int *r_success);
     extern void ShowImageById(const char *p_group, unsigned long p_id, int *r_success);
-    extern void ShowImageByLongId(const char *p_long_id, int *r_success);
     
-    //
-    extern Bool SecurityCanAccessFile(const char *p_file);
-    extern Bool SecurityCanAccessHost(const char *p_host);
-    extern Bool SecurityCanAccessLibrary(const char *p_library);
-	
 #ifdef __cplusplus
 };
 #endif
@@ -439,18 +433,7 @@ extern "C"
 // External declaration macros
 //
 
-#ifdef _MACOSX
-
-#ifdef __cplusplus
-
-#define EXTERNAL_REFERENCE_LIBRARY \
-extern "C" void getXtable(void); \
-void __dummy_function(void) \
-{ \
-getXtable(); \
-}
-
-#else
+#if defined(_MACOSX) || defined(_LINUX)
 
 #define EXTERNAL_REFERENCE_LIBRARY \
 void getXtable(void); \
@@ -458,8 +441,6 @@ void __dummy_function(void) \
 { \
 getXtable(); \
 }
-
-#endif
 
 #else
 
@@ -500,7 +481,6 @@ ExternalDeclaration g_external_table[] = \
 
 #include <cstring>
 #include <exception>
-#include <cstdlib>
 
 template<ExternalHandler u_handler> void ExternalWrapper(char *p_arguments[], int p_argument_count, char **r_result, Bool *r_pass, Bool *r_err)
 {
@@ -534,70 +514,6 @@ template<ExternalHandler u_handler> void ExternalWrapper(char *p_arguments[], in
 #define EXTERNAL_DECLARE_FUNCTION(m_name, m_function) \
 { m_name, "F", 0, ExternalWrapper<m_function>, NULL },
 
-
-#ifdef __OBJC__
-
-#include <Foundation/Foundation.h>
-
-inline void ExternalWrapperObjCCall(ExternalHandler p_handler, char *p_arguments[], int p_argument_count, char **r_result, Bool *r_pass, Bool *r_err)
-{
-	NS_DURING
-	p_handler(p_arguments, p_argument_count, r_result, r_pass, r_err);
-	NS_HANDLER
-	*r_result = strdup([[localException reason] cStringUsingEncoding:NSMacOSRomanStringEncoding]);
-	*r_err = True;
-	NS_ENDHANDLER
-}
-
-template<ExternalHandler u_handler> void ExternalWrapperObjC(char *p_arguments[], int p_argument_count, char **r_result, Bool *r_pass, Bool *r_err)
-{
-	*r_result = NULL;
-    
-	try
-	{
-		NSAutoreleasePool *t_pool;
-		t_pool = [[NSAutoreleasePool alloc] init];
-		if (t_pool != NULL)
-		{
-			ExternalWrapperObjCCall(u_handler, p_arguments, p_argument_count, r_result, r_pass, r_err);
-			[t_pool release];
-		}
-	}
-	catch(std::exception& t_exception)
-	{
-		if (*r_result != NULL)
-			free(*r_result);
-        
-		*r_result = strdup(t_exception . what());
-		*r_err = True;
-	}
-	catch(...)
-	{
-		if (*r_result != NULL)
-			free(*r_result);
-        
-		*r_result = strdup("unknown C++ exception");
-		*r_err = True;
-	}
-}
-
-#define EXTERNAL_DECLARE_COMMAND_OBJC(m_name, m_function) \
-{ m_name, "C", 0, ExternalWrapperObjC<m_function>, NULL },
-
-#define EXTERNAL_DECLARE_FUNCTION_OBJC(m_name, m_function) \
-{ m_name, "F", 0, ExternalWrapperObjC<m_function>, NULL },
-
-#else
-
-
-#define EXTERNAL_DECLARE_COMMAND_OBJC(m_name, m_function) \
-{ m_name, "C", 0, ExternalWrapper<m_function>, NULL },
-
-#define EXTERNAL_DECLARE_FUNCTION_OBJC(m_name, m_function) \
-{ m_name, "F", 0, ExternalWrapper<m_function>, NULL },
-
-#endif
-
 #else
 
 #define EXTERNAL_DECLARE_COMMAND(m_name, m_function) \
@@ -609,8 +525,4 @@ template<ExternalHandler u_handler> void ExternalWrapperObjC(char *p_arguments[]
 #endif
 
 #endif
-
-#define EXTERNAL_LIBINFO(m_name) \
-extern struct LibInfo __libinfo; \
-__attribute((section("__DATA,__libs"))) volatile struct LibInfo *__libinfoptr_##m_name = &__libinfo;
 
