@@ -2,6 +2,9 @@
   "UUID": "F53B34CA-2443-4E91-8AD1-492336C3F706",
   "class": "com.runrev.engine.stack",
   "customPropertySets": {
+    "cREVGeneral": {
+      "scalefactor": "1"
+    },
     "cRevStandaloneSettings": {
       "CopyReferencedFiles": "false",
       "Linux": "false",
@@ -67,7 +70,7 @@
     "cantAbort": "false",
     "cantDelete": "false",
     "cantModify": "false",
-    "decorations": "default",
+    "decorations": "title,menu,minimize,maximize,close",
     "destroyStack": "false",
     "destroyWindow": "false",
     "dynamicPaths": "false",

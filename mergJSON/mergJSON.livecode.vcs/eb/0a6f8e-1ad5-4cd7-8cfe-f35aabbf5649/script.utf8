@@ -1,0 +1,3 @@
+on mouseUp
+   put JSONToArray(format("{ \"hello\" : \"world\"}"))
+end mouseUp

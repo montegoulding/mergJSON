@@ -1,9 +1,9 @@
 {
-  "UUID": "9f58b393-ad3c-4de9-876b-97f8dffde4c7",
+  "UUID": "eb0a6f8e-1ad5-4cd7-8cfe-f35aabbf5649",
   "class": "com.runrev.engine.button",
   "customPropertySets": {
     "cREVGeneral": {
-      "revUniqueID": "1371292829924"
+      "revUniqueID": "1404443101887"
     }
   },
   "properties": {
@@ -44,7 +44,7 @@
     "hilited": "false",
     "hoverIcon": "0",
     "icon": "0",
-    "id": "1017",
+    "id": "1019",
     "ink": "srcCopy",
     "innerGlow": "",
     "innerShadow": "",
@@ -62,7 +62,7 @@
     "name": "Button",
     "opaque": "true",
     "outerGlow": "",
-    "rect": "236,52,318,75",
+    "rect": "40,78,122,101",
     "shadow": "false",
     "shadowColor": "",
     "shadowOffset": "4",
