@@ -72,8 +72,9 @@ char * getPrimitiveString(json_t * tJSON) {
         case JSON_STRING:
         {
             char * tTemp = (char *)json_string_value(tJSON);
-            tReturn = (char*)malloc(strlen(tTemp)+1);
-            snprintf(tReturn,strlen(tTemp),"%s",tTemp);
+            int t_length = strlen(tTemp)+1;
+            tReturn = (char*)malloc(t_length);
+            snprintf(tReturn,t_length,"%s",tTemp);
         }
             break;
         case JSON_OBJECT:
