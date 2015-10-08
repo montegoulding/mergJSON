@@ -3,6 +3,7 @@ language: c
 # Use container-based infrastructure
 sudo: false
 
+before_script: mkdir build
 script: make all-linux
 
 addons:
