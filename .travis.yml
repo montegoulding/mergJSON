@@ -4,3 +4,8 @@ language: c
 sudo: false
 
 script: make all-linux
+
+addons:
+  apt:
+    packages:
+      - libc6-dev-i386
