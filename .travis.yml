@@ -4,10 +4,4 @@ language: c
 sudo: false
 
 before_script: mkdir build
-script: make all-linux
-
-addons:
-  apt:
-    packages:
-      - libc6-dev-i386
-      - linux-libc-dev:i386
+script: make mergJSON-x64.so
