@@ -9,4 +9,4 @@ addons:
   apt:
     packages:
       - libc6-dev-i386
-      - linux-libc-dev
+      - linux-libc-dev:i386
