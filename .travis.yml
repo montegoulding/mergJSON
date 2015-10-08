@@ -1,0 +1,6 @@
+language: c
+
+# Use container-based infrastructure
+sudo: false
+
+script: make all-linux
