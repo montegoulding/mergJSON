@@ -9,3 +9,4 @@ deploy:
   file: build/mergJSON-x64.so
   on:
     repo: montegoulding/mergJSON
+    all_branches: true
