@@ -8,24 +8,24 @@ mergJSON is an external for encoding and decoding [JSON](http://json.org).
 This external has been implemented to encode/decode UTF8 JSON to a LiveCode array as quickly as possible. Currently externals can not work with multi-dimensional LiveCode arrays so the intention is it is used with two functions like this:
 
     -- pArray - array to be encoded
-	  -- pForceRootType - can force the root to be an object if it looks like an array
-	  -- pPretty - include whitespace
-	  function ArrayToJSON pArray,pForceRootType,pPretty
-	    repeat for each key tKey in pArray
-	      if pArray[tKey] is an array then
-	         put "}"&ArrayToJSON(pArray[tKey]) into pArray[tKey]
-	      end if
-	    end repeat
-	    return(mergJSONEncode("pArray",pForceRootType,pPretty))
-	  end ArrayToJSON
-    
-	  function JSONToArray pJSON
-	    local tArray,tKeys
-	    repeat for each line tKey in mergJSONDecode(pJSON,"tArray")
-	      put JSONToArray(tArray[tKey]) into tArray[tKey]
-	    end repeat
-	    return tArray
-	  end JSONToArray
+    -- pForceRootType - can force the root to be an object if it looks like an array
+    -- pPretty - include whitespace
+    function ArrayToJSON pArray,pForceRootType,pPretty
+        repeat for each key tKey in pArray
+            if pArray[tKey] is an array then
+                put "}"&ArrayToJSON(pArray[tKey]) into pArray[tKey]
+            end if
+        end repeat
+        return(mergJSONEncode("pArray",pForceRootType,pPretty))
+    end ArrayToJSON
+
+    function JSONToArray pJSON
+        local tArray,tKeys
+        repeat for each line tKey in mergJSONDecode(pJSON,"tArray")
+            put JSONToArray(tArray[tKey]) into tArray[tKey]
+        end repeat
+        return tArray
+    end JSONToArray
 
 Version: 1.0.24
 
@@ -40,6 +40,7 @@ Syntax: mergJSONEncode(pVariableName, [pForceRootType, pPretty])
 Summary: The function encodes an array as JSON.
 
 If the external encounters \} as the first char of an array element it will assume the string is already encoded. This is how the recursive function is able to translate a multi-dimensional array into JSON. It's also the only way to get an empty array or object into your JSON by setting the element value to \}\[\] or \}\{\}.
+
 If a value looks like a real number it is encoded as an IEEE 754 double. In order to represent the number uniquely a double may need a precision of 15 to 17 decimal places. What this means is that any encoded then decoded doubles may need to be formatted or rounded to the precision you require before displaying it to a user because something like 0.657679 when converted to a double will become 0.65767900000000001.
 
 Parameters:
@@ -55,12 +56,12 @@ Example:
 -- pForceRootType - can force the root to be an object if it looks like an array
 -- pPretty - include whitespace
 function ArrayToJSON pArray,pForceRootType,pPretty
-   repeat for each key tKey in pArray
-      if pArray[tKey] is an array then
-         put "}"&ArrayToJSON(pArray[tKey]) into pArray[tKey]
-      end if
-   end repeat
-   return(mergJSONEncode("pArray",pForceRootType,pPretty))
+    repeat for each key tKey in pArray
+        if pArray[tKey] is an array then
+            put "}"&ArrayToJSON(pArray[tKey]) into pArray[tKey]
+        end if
+    end repeat
+    return(mergJSONEncode("pArray",pForceRootType,pPretty))
 end ArrayToJSON
 
 Name: mergJSONDecode
@@ -78,9 +79,9 @@ Returns: A list of array keys that must be further decoded. As the externals int
 
 Example:
 function JSONToArray pJSON
-   local tArray,tKeys
-   repeat for each line tKey in mergJSONDecode(pJSON,"tArray")
-      put JSONToArray(tArray[tKey]) into tArray[tKey]
-   end repeat
-   return tArray
+    local tArray,tKeys
+    repeat for each line tKey in mergJSONDecode(pJSON,"tArray")
+        put JSONToArray(tArray[tKey]) into tArray[tKey]
+    end repeat
+    return tArray
 end JSONToArray
