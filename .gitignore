@@ -33,3 +33,4 @@ distribute
 *.tmp
 *.zip
 *.xccheckout
+*.xcscmblueprint
