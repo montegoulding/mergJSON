@@ -59,12 +59,21 @@ key -> value pairs.
 */
 
 function JSONToArray pJSON
-   local tArray,tKeys
-   repeat for each line tKey in mergJSONDecode(pJSON,"tArray")
-      put JSONToArray(tArray[tKey]) into tArray[tKey]
-   end repeat
+   local tArray,tRecurse, tKeys
    
+   put mergJSONDecode(pJSON,"tArray") into tRecurse
    if tArray is an array then
+      put the keys of tArray into tKeys
+      
+      split tRecurse by return as set
+      repeat for each line tKey in tKeys
+         if tRecurse[tKey] then
+            put JSONToArray(tArray[tKey]) into tArray[tKey]
+         else
+            put textDecode(tArray[tKey],"UTF8") into tArray[tKey]
+         end if
+      end repeat
+   
       return tArray
    else
       return textDecode(tArray,"UTF8")
