@@ -26,9 +26,3 @@ mergJSON-x64.so: $(sources)
 	-DHAVE_CONFIG_H=1 -D_RELEASE -DNDEBUG -DRELEASE -Xlinker -no-undefined \
 	-fno-exceptions -Wl,-Bstatic -Wl,-Bdynamic -shared $(sources) \
 	-o build/mergJSON-x64.so
-
-mergJSON.dll: $(sources)
-	gcc -m32 -I mergJSON -I mergJSON/jansson/src -DHAVE_CONFIG_H=1 -D_WIN32 \
-	-D_RELEASE -DNDEBUG -DRELEASE -Xlinker -no-undefined -fno-exceptions \
-	-Wl,-Bstatic -Wl,-Bdynamic -static -shared $(sources) \
-	-o build/mergJSON.dll
