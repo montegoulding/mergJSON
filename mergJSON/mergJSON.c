@@ -24,6 +24,8 @@
  */
 
 #define LIVECODE_FUNCTION(x) void x(char *p_arguments[], int p_argument_count, char **r_result, Bool *r_pass, Bool *r_err)
+// note: returning r_err=True will cause a runtime error.
+// This is pretty drastic and should only be reserved for fatal errors.
 #define LIVECODE_ERROR(x) { *r_err = True; 		*r_pass = False; 		*r_result = strdup(x); 		return; }
 
 #define LIVECODE_WRITEVARIABLE(var,number) { \

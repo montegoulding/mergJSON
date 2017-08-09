@@ -4,9 +4,9 @@ on revLoadLibrary
    if the target is not me then
       pass revLoadLibrary
    end if
-   
+
    insert the script of me into back
-   
+
    if the environment contains "development" then
       set the _ideoverride of me to true
    end if
@@ -16,7 +16,7 @@ on revUnloadLibrary
    if the target is not me then
       pass revUnloadLibrary
    end if
-   
+
    remove the script of me from back
 end revUnloadLibrary
 
@@ -52,7 +52,7 @@ pJSON (string): A UTF8 encoded JSON string
 Returns: A LiveCode array
 
 Description:
-JSON arrays are translated to LiveCode numerically indexed arrays 
+JSON arrays are translated to LiveCode numerically indexed arrays
 with keys 1...N and JSON objects are translated to LiveCode array
 key -> value pairs.
 
@@ -60,23 +60,27 @@ key -> value pairs.
 
 function JSONToArray pJSON
    local tArray,tRecurse, tKeys
-   
-   put mergJSONDecode(pJSON,"tArray") into tRecurse
-   if tArray is an array then
-      put the keys of tArray into tKeys
-      
-      split tRecurse by return as set
-      repeat for each line tKey in tKeys
-         if tRecurse[tKey] then
-            put JSONToArray(tArray[tKey]) into tArray[tKey]
-         else
-            put textDecode(tArray[tKey],"UTF8") into tArray[tKey]
-         end if
-      end repeat
-   
-      return tArray
+
+   if pJSON is not empty then
+      put mergJSONDecode(pJSON,"tArray") into tRecurse
+      if tArray is an array then
+         put the keys of tArray into tKeys
+
+         split tRecurse by return as set
+         repeat for each line tKey in tKeys
+            if tRecurse[tKey] then
+               put JSONToArray(tArray[tKey]) into tArray[tKey]
+            else
+               put textDecode(tArray[tKey],"UTF8") into tArray[tKey]
+            end if
+         end repeat
+
+         return tArray
+      else
+         return textDecode(tArray,"UTF8")
+      end if
    else
-      return textDecode(tArray,"UTF8")
+      return empty
    end if
 end JSONToArray
 
@@ -90,7 +94,7 @@ ask question "What do you want to send?"
 if it is not empty then
    put it into tMessage["text"]
    put ArrayToJSON(tMessage) into tMessage
-   
+
    set the httpHeaders to "Content-type: application/json"
    post tMessage to url kSlackWebhookURL
 end if
@@ -113,14 +117,18 @@ translated to JSON objects.
 */
 
 function ArrayToJSON pArray,pForceRootType,pPretty
-   repeat for each key tKey in pArray
-      if pArray[tKey] is an array then
-         put "}"&ArrayToJSON(pArray[tKey],pForceRootType) into pArray[tKey]
-      else if char 1 of pArray[tKey] = "}" then
-         put "}}" before pArray[tKey]
-      else
-         put textEncode(pArray[tKey],"UTF8") into pArray[tKey]
-      end if
-   end repeat
-   return(mergJSONEncode("pArray",pForceRootType,pPretty))
+   if pArray is not empty then
+      repeat for each key tKey in pArray
+         if pArray[tKey] is an array then
+            put "}"&ArrayToJSON(pArray[tKey],pForceRootType) into pArray[tKey]
+         else if char 1 of pArray[tKey] = "}" then
+            put "}}" before pArray[tKey]
+         else
+            put textEncode(pArray[tKey],"UTF8") into pArray[tKey]
+         end if
+      end repeat
+      return(mergJSONEncode("pArray",pForceRootType,pPretty))
+   else
+      return empty
+   end if
 end ArrayToJSON
