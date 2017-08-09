@@ -49,15 +49,12 @@ char * getPrimitiveString(json_t * tJSON) {
     switch (json_typeof(tJSON))
     {
         case JSON_TRUE:
-            tReturn = (char*)malloc(5);
             tReturn = strdup("true");
             break;
         case JSON_FALSE:
-            tReturn = (char*)malloc(6);
             tReturn = strdup("false");
             break;
         case JSON_NULL:
-            tReturn = (char*)malloc(5);
             tReturn = strdup("null");
             break;
         case JSON_INTEGER:
@@ -77,8 +74,9 @@ char * getPrimitiveString(json_t * tJSON) {
         case JSON_STRING:
         {
             char * tTemp = (char *)json_string_value(tJSON);
-            tReturn = (char*)malloc(strlen(tTemp)+1);
-            tReturn = strdup(tTemp);
+            int t_length = strlen(tTemp)+1;
+            tReturn = (char*)malloc(t_length);
+            snprintf(tReturn,t_length,"%s",tTemp);
         }
             break;
         case JSON_OBJECT:
@@ -356,13 +354,12 @@ LIVECODE_FUNCTION(mergJSONDecode)
                     }
                     tArray[i].buffer = tKeyJSON;
                     tArray[i].length = (int)strlen(tKeyJSON);
-                    
                 }
                 SetArray(p_arguments[1], tSize, tArray, NULL, &success);
                 if (success == EXTERNAL_FAILURE) {
                     LIVECODE_ERROR("could not set array");
                 }
-                for (i=1;i<tSize;i++) {
+                for (i=0;i<tSize;i++) {
                     free((void *)tArray[i].buffer);
                 }
                 
@@ -402,8 +399,9 @@ LIVECODE_FUNCTION(mergJSONDecode)
                     LIVECODE_ERROR("could not set array");
                 }
                 
-                for (i=1;i<tSize;i++) {
+                for (i=0;i<tSize;i++) {
                     free((void *)tArray[i].buffer);
+                    free(tKeys[i]);
                 }
                 
             }

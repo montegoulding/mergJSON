@@ -1,0 +1,12 @@
+language: c
+sudo: false
+before_script: mkdir build
+script: make mergJSON-x64.so
+deploy:
+  provider: releases
+  api_key:
+    secure: yiehaOI6VhmgYNvVUml+i6G1dmpTcHaHdbGb/jyUgMSFjvX6REnzurC3DFlvpUxGcxOFsZ5v8U0JFazBnmpRfTohXEyVkrp0tr98l2E3/s+xycircXChvUxMbMElMbNgau970cNV1rkHWMjCaIVRnySeWtuc2+67wFWoWyBUECRkGq2HWrQvUGFMUuBRUYOCrBMd7VIzA4yrH3NXgd84dmyy2JCOJQbaCm+g4x0GjcdESXr0SmQWX8egqFro5n+HDsDh9yhD0dE7rNc0RAuckc23ZAipQpYToNAA55CT3R8wQLTRr4Wt4MCg6SAVpp5r7bLCDpdNTz8arovlQqgErasS/wsYWWTllebTRm3aG/uh/V18qQd6gXdvguuhcR5PUa4rjt6Ww+iq+Y5A/Nf0XN0ZKkjoLLTEQpFgt5NLCKvK1l+sVc3vR9Ebfp6hpVOjvjY6eCd7fBD9unTVRQapINP66yWL85qZYEiyYbIfHkCO4yrhq7Pbhr+0EOrWmJZSYOZ7rkeoQw0B148lktaT6MPtc8f7cdoV3iGVS2bulsf414AovHL3NxUiI9PlKqd5St4IfBIFQu6AtvaOHxDZmXTSkkXyi39yaQXEc9vp2sd74+ZR+SXqoDcZA5Fa+eln3EJyVaZLp69H2WyqFuasD+CrCOpscF3fM+Cw9MakHc0=
+  file: build/mergJSON-x64.so
+  on:
+    repo: montegoulding/mergJSON
+    tags: true

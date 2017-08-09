@@ -2,6 +2,8 @@
 
 A [LiveCode](http://runrev.com) [JSON](http://json.org) encoding/decoding external.
 
+[![Build Status](https://travis-ci.org/montegoulding/mergJSON.svg)](https://travis-ci.org/montegoulding/mergJSON)
+
 ##Author
 
 [Monte Goulding](mailto:monte@goulding.ws)
@@ -49,7 +51,7 @@ This external has been implemented to encode/decode UTF8 JSON to a LiveCode arra
 	   return tArray
 	end JSONToArray
 
-For most cases the above is all the documentaion you will need. There are however some quirks to the external you might need to know about. 
+For most cases the above is all the documentaion you will need. There are however some quirks to the external you might need to know about.
 
 ###Quirk 1
 
