@@ -308,7 +308,7 @@ LIVECODE_FUNCTION(mergJSONDecode)
     json_t * tJSON;
     json_error_t tError;
     
-    tJSON = json_loads(p_arguments[0], JSON_DECODE_ANY, &tError);
+    tJSON = json_loads(p_arguments[0], JSON_DECODE_ANY | JSON_DECODE_NUMBER_AS_STRING, &tError);
     
     if (!tJSON) {
         char * tErrorString = malloc(strlen("could not decode JSON: ")+strlen(tError.text)+1);
