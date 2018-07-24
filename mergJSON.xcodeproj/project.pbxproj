@@ -35,6 +35,12 @@
 		B2B54CB0176EAD490047920A /* value.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECB216EC9C2F005E495C /* value.c */; };
 		B2B54CB1176EAD4E0047920A /* mergJSON.c in Sources */ = {isa = PBXBuildFile; fileRef = B285232F16B3FBF500159A3F /* mergJSON.c */; };
 		B2B54CB2176EAD4E0047920A /* external.c in Sources */ = {isa = PBXBuildFile; fileRef = B262C13316B3F772002D4FEC /* external.c */; };
+		B2C267A020EE2FCA00FB4F3D /* jansson_private_config.h in Sources */ = {isa = PBXBuildFile; fileRef = B2C2679F20EE2FCA00FB4F3D /* jansson_private_config.h */; };
+		B2C267A120EE2FCA00FB4F3D /* jansson_private_config.h in Sources */ = {isa = PBXBuildFile; fileRef = B2C2679F20EE2FCA00FB4F3D /* jansson_private_config.h */; };
+		B2C267A220EE2FCA00FB4F3D /* jansson_private_config.h in Sources */ = {isa = PBXBuildFile; fileRef = B2C2679F20EE2FCA00FB4F3D /* jansson_private_config.h */; };
+		B2C267A420EE311100FB4F3D /* hashtable_seed.c in Sources */ = {isa = PBXBuildFile; fileRef = B2C267A320EE311100FB4F3D /* hashtable_seed.c */; };
+		B2C267A520EE311100FB4F3D /* hashtable_seed.c in Sources */ = {isa = PBXBuildFile; fileRef = B2C267A320EE311100FB4F3D /* hashtable_seed.c */; };
+		B2C267A620EE311100FB4F3D /* hashtable_seed.c in Sources */ = {isa = PBXBuildFile; fileRef = B2C267A320EE311100FB4F3D /* hashtable_seed.c */; };
 		B2FFECB316EC9C2F005E495C /* dump.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECA916EC9C2F005E495C /* dump.c */; };
 		B2FFECB416EC9C2F005E495C /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECAA16EC9C2F005E495C /* error.c */; };
 		B2FFECB516EC9C2F005E495C /* hashtable.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECAB16EC9C2F005E495C /* hashtable.c */; };
@@ -78,6 +84,8 @@
 		B28F3C9416B3F5E1009D2F35 /* mergJSON-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "mergJSON-Info.plist"; sourceTree = "<group>"; };
 		B28F3C9616B3F5E1009D2F35 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B2B54CA3176EAD1C0047920A /* mergJSON.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = mergJSON.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2C2679F20EE2FCA00FB4F3D /* jansson_private_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = jansson_private_config.h; sourceTree = "<group>"; };
+		B2C267A320EE311100FB4F3D /* hashtable_seed.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = hashtable_seed.c; path = mergJSON/jansson/src/hashtable_seed.c; sourceTree = "<group>"; };
 		B2FFECA916EC9C2F005E495C /* dump.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dump.c; path = mergJSON/jansson/src/dump.c; sourceTree = "<group>"; };
 		B2FFECAA16EC9C2F005E495C /* error.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = error.c; path = mergJSON/jansson/src/error.c; sourceTree = "<group>"; };
 		B2FFECAB16EC9C2F005E495C /* hashtable.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = hashtable.c; path = mergJSON/jansson/src/hashtable.c; sourceTree = "<group>"; };
@@ -119,6 +127,7 @@
 		B28F3C8216B3F5E1009D2F35 = {
 			isa = PBXGroup;
 			children = (
+				B2C267A320EE311100FB4F3D /* hashtable_seed.c */,
 				B22BC38016EF3DF200865342 /* jansson.h */,
 				B22BC38116EF3DF200865342 /* hashtable.h */,
 				B22BC38216EF3DF200865342 /* jansson_private.h */,
@@ -164,6 +173,7 @@
 		B28F3C9216B3F5E1009D2F35 /* mergJSON */ = {
 			isa = PBXGroup;
 			children = (
+				B2C2679F20EE2FCA00FB4F3D /* jansson_private_config.h */,
 				B285232F16B3FBF500159A3F /* mergJSON.c */,
 				B22BC37D16EF3B8D00865342 /* jansson_config.h */,
 				B262C13316B3F772002D4FEC /* external.c */,
@@ -337,6 +347,7 @@
 			files = (
 				B2662DE217684D8900E9A174 /* dump.c in Sources */,
 				B2662DE317684D8900E9A174 /* error.c in Sources */,
+				B2C267A120EE2FCA00FB4F3D /* jansson_private_config.h in Sources */,
 				B2662DE417684D8900E9A174 /* hashtable.c in Sources */,
 				B2662DE517684D8900E9A174 /* load.c in Sources */,
 				B2662DE617684D8900E9A174 /* memory.c in Sources */,
@@ -347,6 +358,7 @@
 				B2662DEB17684D8900E9A174 /* value.c in Sources */,
 				B2662DEC17684D8900E9A174 /* mergJSON.c in Sources */,
 				B2662DED17684D8900E9A174 /* external.c in Sources */,
+				B2C267A520EE311100FB4F3D /* hashtable_seed.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,6 +368,7 @@
 			files = (
 				B262C13516B3F772002D4FEC /* external.c in Sources */,
 				B285233016B3FBF500159A3F /* mergJSON.c in Sources */,
+				B2C267A020EE2FCA00FB4F3D /* jansson_private_config.h in Sources */,
 				B2FFECB316EC9C2F005E495C /* dump.c in Sources */,
 				B2FFECB416EC9C2F005E495C /* error.c in Sources */,
 				B2FFECB516EC9C2F005E495C /* hashtable.c in Sources */,
@@ -366,6 +379,7 @@
 				B2FFECBA16EC9C2F005E495C /* strconv.c in Sources */,
 				B2FFECBB16EC9C2F005E495C /* utf.c in Sources */,
 				B2FFECBC16EC9C2F005E495C /* value.c in Sources */,
+				B2C267A420EE311100FB4F3D /* hashtable_seed.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,6 +389,7 @@
 			files = (
 				B2B54CA7176EAD490047920A /* dump.c in Sources */,
 				B2B54CA8176EAD490047920A /* error.c in Sources */,
+				B2C267A220EE2FCA00FB4F3D /* jansson_private_config.h in Sources */,
 				B2B54CA9176EAD490047920A /* hashtable.c in Sources */,
 				B2B54CAA176EAD490047920A /* load.c in Sources */,
 				B2B54CAB176EAD490047920A /* memory.c in Sources */,
@@ -385,6 +400,7 @@
 				B2B54CB0176EAD490047920A /* value.c in Sources */,
 				B2B54CB1176EAD4E0047920A /* mergJSON.c in Sources */,
 				B2B54CB2176EAD4E0047920A /* external.c in Sources */,
+				B2C267A620EE311100FB4F3D /* hashtable_seed.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,7 +465,7 @@
 		B28F3C9916B3F5E1009D2F35 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -469,18 +485,25 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/jansson/src",
+					"$(SRCROOT)/jansson/include",
+					"$(SRCROOT)/jansson/private_include",
+				);
 				LIVECODE_SDKROOT = "$(USER_LIBRARY_DIR)/Application Support/RunRev/Components/LiveCodeSDK";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = "-DHAVE_CONFIG_H=1";
 				SDKROOT = macosx;
 				SYMROOT = build;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/jansson/private_include";
 			};
 			name = Debug;
 		};
 		B28F3C9A16B3F5E1009D2F35 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -494,10 +517,17 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/jansson/src",
+					"$(SRCROOT)/jansson/include",
+					"$(SRCROOT)/jansson/private_include",
+				);
 				LIVECODE_SDKROOT = "$(USER_LIBRARY_DIR)/Application Support/RunRev/Components/LiveCodeSDK";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				OTHER_CFLAGS = "-DHAVE_CONFIG_H=1";
 				SDKROOT = macosx;
 				SYMROOT = build;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/jansson/private_include";
 			};
 			name = Release;
 		};
@@ -510,7 +540,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
 				GCC_VERSION = "";
-				HEADER_SEARCH_PATHS = /Users/montegoulding/jansson/src;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "mergJSON/mergJSON-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
@@ -531,7 +561,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "";
 				GCC_VERSION = "";
-				HEADER_SEARCH_PATHS = /Users/montegoulding/jansson/src;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "mergJSON/mergJSON-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
@@ -547,7 +577,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					"$(ARCHS_STANDARD_32_BIT)",
+					"$(ARCHS_STANDARD_64_BIT)",
+				);
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
@@ -561,7 +594,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					"$(ARCHS_STANDARD_32_BIT)",
+					"$(ARCHS_STANDARD_64_BIT)",
+				);
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
