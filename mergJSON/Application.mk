@@ -1,6 +1,6 @@
 APP_BUILD_SCRIPT := $(call my-dir)/Android.mk
 
-APP_PLATFORM := android-8
+APP_PLATFORM := android-16
 
 # NOTE: Default CPP settings add no-exceptions no-rtti so don't need to specify
 

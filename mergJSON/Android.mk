@@ -2,7 +2,7 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-TARGET_PLATFORM=android-8
+TARGET_PLATFORM=android-16
 
 LOCAL_MODULE := $(EXTERNAL_NAME)
 
