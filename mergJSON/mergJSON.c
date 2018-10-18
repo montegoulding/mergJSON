@@ -142,7 +142,7 @@ LIVECODE_FUNCTION(mergJSONEncode)
     if (p_argument_count > 2) {
         tPretty = !strcmp(p_arguments[2], "true");
     }
-    int tSuccess;
+    int tSuccess = EXTERNAL_SUCCESS;
     int tKeycount = 0;
     json_t * tJSON;
     char * tErrorString = NULL;
@@ -187,18 +187,29 @@ LIVECODE_FUNCTION(mergJSONEncode)
         
     } else {
         
-        ExternalString tArray[tKeycount];
-        char * tKeys[tKeycount];
+        ExternalString *tArray = (ExternalString *)malloc(sizeof(ExternalString) * tKeycount);
+        char ** tKeys = (char **)malloc(sizeof(char *) * tKeycount);
+        
         GetArray(p_arguments[0], &tKeycount, tArray, tKeys, &tSuccess);
-        if (tSuccess == EXTERNAL_FAILURE) LIVECODE_ERROR("could not read variable");
+        if (tSuccess == EXTERNAL_FAILURE)
+        {
+            free(tArray);
+            free(tKeys);
+            LIVECODE_ERROR("could not read variable");
+        }
         
         // NEED TO MAINTAIN ARRAY ORDER IN JSON ARRAYS BUT LC ARRAY KEYS ARE OUT OF NUMERIC ORDER
         Bool tIsArray = (tForceType == NULL  || strcmp(tForceType, "object"));
-        int tKeyMap[tKeycount];
-        Bool tCheckMap[tKeycount];
+        int *tKeyMap = NULL;
+        if (tIsArray)
+        {
+            tKeyMap = (int *)malloc(sizeof(int) * tKeycount);
+        }
+        
         int tKey;
         
         if (tIsArray) {
+            Bool *tCheckMap = (Bool *)malloc(sizeof(Bool) * tKeycount);
             for (i=0; i<tKeycount; i++) {
                 if (isdigit(tKeys[i][0])) {
                     char * tEnd;
@@ -227,6 +238,8 @@ LIVECODE_FUNCTION(mergJSONEncode)
                     }
                 }
             }
+            
+            free(tCheckMap);
         }
         if (tIsArray) {
             tJSON = json_array();
@@ -254,7 +267,14 @@ LIVECODE_FUNCTION(mergJSONEncode)
                         tString[tArray[tKeyIndex].length-2] = 0;
                         tKeyJSON = json_string(tString);
                         free(tString);
-                        if (!tKeyJSON) {
+                        if (!tKeyJSON)
+                        {
+                            if (tKeyMap != NULL)
+                            {
+                                free(tKeyMap);
+                            }
+                            free(tArray);
+                            free(tKeys);
                             LIVECODE_ERROR("could not encode value in array element");
                         }
                     } else {
@@ -263,6 +283,12 @@ LIVECODE_FUNCTION(mergJSONEncode)
                         if (!tKeyJSON) {
                             tErrorString = malloc(strlen("could not decode JSON in array element: ")+strlen(tError.text)+1);
                             json_decref(tJSON);
+                            if (tKeyMap != NULL)
+                            {
+                                free(tKeyMap);
+                            }
+                            free(tArray);
+                            free(tKeys);
                             LIVECODE_ERROR(tErrorString);
                         }
                     }
@@ -274,6 +300,12 @@ LIVECODE_FUNCTION(mergJSONEncode)
                     tKeyJSON = getPrimitiveJSON(tString,tForceType);
                     free(tString);
                     if (!tKeyJSON) {
+                        if (tKeyMap != NULL)
+                        {
+                            free(tKeyMap);
+                        }
+                        free(tArray);
+                        free(tKeys);
                         LIVECODE_ERROR("could not encode value in array element");
                     }
                 }
@@ -284,6 +316,13 @@ LIVECODE_FUNCTION(mergJSONEncode)
                 json_object_set_new(tJSON, tKeys[tKeyIndex], tKeyJSON);
             }
         }
+        
+        if (tKeyMap != NULL)
+        {
+            free(tKeyMap);
+        }
+        free(tArray);
+        free(tKeys);
     }
     size_t tFlags = JSON_ENCODE_ANY;
     if (tPretty) {
