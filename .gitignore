@@ -40,3 +40,4 @@ distribute
 *.VC.*
 .vs/
 Debug/
+msbuild.log
