@@ -21,6 +21,8 @@
 		B2662DEB17684D8900E9A174 /* value.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECB216EC9C2F005E495C /* value.c */; };
 		B2662DEC17684D8900E9A174 /* mergJSON.c in Sources */ = {isa = PBXBuildFile; fileRef = B285232F16B3FBF500159A3F /* mergJSON.c */; };
 		B2662DED17684D8900E9A174 /* external.c in Sources */ = {isa = PBXBuildFile; fileRef = B262C13316B3F772002D4FEC /* external.c */; };
+		B26FF9EF22B5A35B004A9568 /* jansson_private_config.h in Sources */ = {isa = PBXBuildFile; fileRef = B26FF9ED22B5A35B004A9568 /* jansson_private_config.h */; };
+		B26FF9F022B5A35B004A9568 /* jansson_config.h in Sources */ = {isa = PBXBuildFile; fileRef = B26FF9EE22B5A35B004A9568 /* jansson_config.h */; };
 		B285233016B3FBF500159A3F /* mergJSON.c in Sources */ = {isa = PBXBuildFile; fileRef = B285232F16B3FBF500159A3F /* mergJSON.c */; };
 		B28F3C9716B3F5E1009D2F35 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B28F3C9516B3F5E1009D2F35 /* InfoPlist.strings */; };
 		B2B54CA7176EAD490047920A /* dump.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECA916EC9C2F005E495C /* dump.c */; };
@@ -35,9 +37,6 @@
 		B2B54CB0176EAD490047920A /* value.c in Sources */ = {isa = PBXBuildFile; fileRef = B2FFECB216EC9C2F005E495C /* value.c */; };
 		B2B54CB1176EAD4E0047920A /* mergJSON.c in Sources */ = {isa = PBXBuildFile; fileRef = B285232F16B3FBF500159A3F /* mergJSON.c */; };
 		B2B54CB2176EAD4E0047920A /* external.c in Sources */ = {isa = PBXBuildFile; fileRef = B262C13316B3F772002D4FEC /* external.c */; };
-		B2C267A020EE2FCA00FB4F3D /* jansson_private_config.h in Sources */ = {isa = PBXBuildFile; fileRef = B2C2679F20EE2FCA00FB4F3D /* jansson_private_config.h */; };
-		B2C267A120EE2FCA00FB4F3D /* jansson_private_config.h in Sources */ = {isa = PBXBuildFile; fileRef = B2C2679F20EE2FCA00FB4F3D /* jansson_private_config.h */; };
-		B2C267A220EE2FCA00FB4F3D /* jansson_private_config.h in Sources */ = {isa = PBXBuildFile; fileRef = B2C2679F20EE2FCA00FB4F3D /* jansson_private_config.h */; };
 		B2C267A420EE311100FB4F3D /* hashtable_seed.c in Sources */ = {isa = PBXBuildFile; fileRef = B2C267A320EE311100FB4F3D /* hashtable_seed.c */; };
 		B2C267A520EE311100FB4F3D /* hashtable_seed.c in Sources */ = {isa = PBXBuildFile; fileRef = B2C267A320EE311100FB4F3D /* hashtable_seed.c */; };
 		B2C267A620EE311100FB4F3D /* hashtable_seed.c in Sources */ = {isa = PBXBuildFile; fileRef = B2C267A320EE311100FB4F3D /* hashtable_seed.c */; };
@@ -66,7 +65,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B22BC37D16EF3B8D00865342 /* jansson_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = jansson_config.h; sourceTree = "<group>"; };
 		B22BC38016EF3DF200865342 /* jansson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; name = jansson.h; path = mergJSON/jansson/src/jansson.h; sourceTree = "<group>"; };
 		B22BC38116EF3DF200865342 /* hashtable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; name = hashtable.h; path = mergJSON/jansson/src/hashtable.h; sourceTree = "<group>"; };
 		B22BC38216EF3DF200865342 /* jansson_private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; name = jansson_private.h; path = mergJSON/jansson/src/jansson_private.h; sourceTree = "<group>"; };
@@ -78,13 +76,14 @@
 		B2662DBC17684D1100E9A174 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B2662DCB17684D1100E9A174 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		B2662DCD17684D1100E9A174 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		B26FF9ED22B5A35B004A9568 /* jansson_private_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; name = jansson_private_config.h; path = include/jansson_private_config.h; sourceTree = "<group>"; };
+		B26FF9EE22B5A35B004A9568 /* jansson_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; name = jansson_config.h; path = include/jansson_config.h; sourceTree = "<group>"; };
 		B285232F16B3FBF500159A3F /* mergJSON.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mergJSON.c; sourceTree = "<group>"; };
 		B28F3C8D16B3F5E1009D2F35 /* mergJSON.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mergJSON.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		B28F3C9016B3F5E1009D2F35 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		B28F3C9416B3F5E1009D2F35 /* mergJSON-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "mergJSON-Info.plist"; sourceTree = "<group>"; };
 		B28F3C9616B3F5E1009D2F35 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B2B54CA3176EAD1C0047920A /* mergJSON.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = mergJSON.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
-		B2C2679F20EE2FCA00FB4F3D /* jansson_private_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj.h; path = jansson_private_config.h; sourceTree = "<group>"; };
 		B2C267A320EE311100FB4F3D /* hashtable_seed.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = hashtable_seed.c; path = mergJSON/jansson/src/hashtable_seed.c; sourceTree = "<group>"; };
 		B2FFECA916EC9C2F005E495C /* dump.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dump.c; path = mergJSON/jansson/src/dump.c; sourceTree = "<group>"; };
 		B2FFECAA16EC9C2F005E495C /* error.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = error.c; path = mergJSON/jansson/src/error.c; sourceTree = "<group>"; };
@@ -173,9 +172,9 @@
 		B28F3C9216B3F5E1009D2F35 /* mergJSON */ = {
 			isa = PBXGroup;
 			children = (
-				B2C2679F20EE2FCA00FB4F3D /* jansson_private_config.h */,
+				B26FF9EE22B5A35B004A9568 /* jansson_config.h */,
+				B26FF9ED22B5A35B004A9568 /* jansson_private_config.h */,
 				B285232F16B3FBF500159A3F /* mergJSON.c */,
-				B22BC37D16EF3B8D00865342 /* jansson_config.h */,
 				B262C13316B3F772002D4FEC /* external.c */,
 				B262C13416B3F772002D4FEC /* external.h */,
 				B28F3C9316B3F5E1009D2F35 /* Supporting Files */,
@@ -347,7 +346,6 @@
 			files = (
 				B2662DE217684D8900E9A174 /* dump.c in Sources */,
 				B2662DE317684D8900E9A174 /* error.c in Sources */,
-				B2C267A120EE2FCA00FB4F3D /* jansson_private_config.h in Sources */,
 				B2662DE417684D8900E9A174 /* hashtable.c in Sources */,
 				B2662DE517684D8900E9A174 /* load.c in Sources */,
 				B2662DE617684D8900E9A174 /* memory.c in Sources */,
@@ -368,8 +366,8 @@
 			files = (
 				B262C13516B3F772002D4FEC /* external.c in Sources */,
 				B285233016B3FBF500159A3F /* mergJSON.c in Sources */,
-				B2C267A020EE2FCA00FB4F3D /* jansson_private_config.h in Sources */,
 				B2FFECB316EC9C2F005E495C /* dump.c in Sources */,
+				B26FF9EF22B5A35B004A9568 /* jansson_private_config.h in Sources */,
 				B2FFECB416EC9C2F005E495C /* error.c in Sources */,
 				B2FFECB516EC9C2F005E495C /* hashtable.c in Sources */,
 				B2FFECB616EC9C2F005E495C /* load.c in Sources */,
@@ -377,6 +375,7 @@
 				B2FFECB816EC9C2F005E495C /* pack_unpack.c in Sources */,
 				B2FFECB916EC9C2F005E495C /* strbuffer.c in Sources */,
 				B2FFECBA16EC9C2F005E495C /* strconv.c in Sources */,
+				B26FF9F022B5A35B004A9568 /* jansson_config.h in Sources */,
 				B2FFECBB16EC9C2F005E495C /* utf.c in Sources */,
 				B2FFECBC16EC9C2F005E495C /* value.c in Sources */,
 				B2C267A420EE311100FB4F3D /* hashtable_seed.c in Sources */,
@@ -389,7 +388,6 @@
 			files = (
 				B2B54CA7176EAD490047920A /* dump.c in Sources */,
 				B2B54CA8176EAD490047920A /* error.c in Sources */,
-				B2C267A220EE2FCA00FB4F3D /* jansson_private_config.h in Sources */,
 				B2B54CA9176EAD490047920A /* hashtable.c in Sources */,
 				B2B54CAA176EAD490047920A /* load.c in Sources */,
 				B2B54CAB176EAD490047920A /* memory.c in Sources */,
@@ -486,9 +484,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/include",
 					"$(SRCROOT)/jansson/src",
-					"$(SRCROOT)/jansson/include",
-					"$(SRCROOT)/jansson/private_include",
 				);
 				LIVECODE_SDKROOT = "$(USER_LIBRARY_DIR)/Application Support/RunRev/Components/LiveCodeSDK";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
@@ -496,7 +493,7 @@
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H=1";
 				SDKROOT = macosx;
 				SYMROOT = build;
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/jansson/private_include";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/include";
 			};
 			name = Debug;
 		};
@@ -518,16 +515,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/include",
 					"$(SRCROOT)/jansson/src",
-					"$(SRCROOT)/jansson/include",
-					"$(SRCROOT)/jansson/private_include",
 				);
 				LIVECODE_SDKROOT = "$(USER_LIBRARY_DIR)/Application Support/RunRev/Components/LiveCodeSDK";
 				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				OTHER_CFLAGS = "-DHAVE_CONFIG_H=1";
 				SDKROOT = macosx;
 				SYMROOT = build;
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/jansson/private_include";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/include";
 			};
 			name = Release;
 		};

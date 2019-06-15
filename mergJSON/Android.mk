@@ -11,6 +11,7 @@ LOCAL_SRC_FILES := mergJSON.c external.c jansson/src/dump.c jansson/src/error.c 
 LOCAL_C_INCLUDES := \
 	$(LOCAL_PATH) \
 	$(LOCAL_PATH)/jansson/src \
+	$(LOCAL_PATH)/include
 
 LOCAL_LDFLAGS += -latomic -Wl,-u,getXtable
 
