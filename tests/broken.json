@@ -1,0 +1,14 @@
+{
+    "n_object_non_string_key_but_huge_number_instead.json": "Jansson parses non-string keys",
+    "y_object_escaped_null_in_key.json": "NULL byte in key is not supported in Jansson",
+    "i_number_pos_double_huge_exp.json": "Jansson patch stringifies big numbers",
+    "y_string_null_escape.json": "JSON: \\u0000 is not allowed without JSON_ALLOW_NUL",
+    "i_string_unicode_U+1FFFE_nonchar.json": "Jansson parses non-char unicode",
+    "i_string_unicode_U+10FFFE_nonchar.json": "Jansson parses non-char unicode",
+    "n_object_non_string_key.json": "Jansson parses non-string keys",
+    "y_string_utf16.json": "Janson only supports UTF8",
+    "i_string_unicode_U+FDD0_nonchar.json": "Jansson parses non-char unicode",
+    "i_string_unicode_U+FFFE_nonchar.json": "Jansson parses non-char unicode",
+    "n_number_then_00.json": "Not really sure why this is meant to fail..",
+    "i_number_neg_int_huge_exp.json": "Jansson patch stringifies big numbers"
+}

@@ -35,3 +35,9 @@ distribute
 *.zip
 *.xccheckout
 *.xcscmblueprint
+*.vcxproj.filters
+*.vcxproj.user
+*.VC.*
+.vs/
+Debug/
+msbuild.log

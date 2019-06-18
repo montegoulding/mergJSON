@@ -289,6 +289,7 @@ LIVECODE_FUNCTION(mergJSONEncode)
                             }
                             free(tArray);
                             free(tKeys);
+
                             LIVECODE_ERROR(tErrorString);
                         }
                     }
@@ -324,6 +325,7 @@ LIVECODE_FUNCTION(mergJSONEncode)
         free(tArray);
         free(tKeys);
     }
+
     size_t tFlags = JSON_ENCODE_ANY;
     if (tPretty) {
         tFlags = tFlags | JSON_INDENT(2);
@@ -369,7 +371,7 @@ LIVECODE_FUNCTION(mergJSONDecode)
                 LIVECODE_WRITEVARIABLE("", 1);
             } else {
                 tSize = json_array_size(tJSON);
-                ExternalString tArray[tSize];
+                ExternalString* tArray = malloc(tSize * sizeof(ExternalString));
                 for (i = 0;i < tSize;i++) {
                     json_t * tValue = json_array_get(tJSON, i);
                     char * tKeyJSON;
@@ -393,13 +395,15 @@ LIVECODE_FUNCTION(mergJSONDecode)
                     tArray[i].length = (int)strlen(tKeyJSON);
                 }
                 SetArray(p_arguments[1], tSize, tArray, NULL, &success);
-                if (success == EXTERNAL_FAILURE) {
-                    LIVECODE_ERROR("could not set array");
-                }
+                
                 for (i=0;i<tSize;i++) {
                     free((void *)tArray[i].buffer);
                 }
-                
+				free(tArray);
+
+				if (success == EXTERNAL_FAILURE) {
+					LIVECODE_ERROR("could not set array");
+				}
             }
             break;
         case JSON_OBJECT:
@@ -407,8 +411,8 @@ LIVECODE_FUNCTION(mergJSONDecode)
                 LIVECODE_WRITEVARIABLE("", 1);
             } else {
                 tSize = json_object_size(tJSON);
-                ExternalString tArray[tSize];
-                char *tKeys[tSize];
+				ExternalString* tArray = malloc(tSize * sizeof(ExternalString));
+				char **tKeys = malloc(tSize * sizeof(char *));
                 const char *tKey;
                 json_t *tValue;
                 int i = 0;
@@ -432,15 +436,15 @@ LIVECODE_FUNCTION(mergJSONDecode)
                     i++;
                 }
                 SetArray(p_arguments[1], tSize, tArray, tKeys, &success);
-                if (success == EXTERNAL_FAILURE) {
-                    LIVECODE_ERROR("could not set array");
-                }
                 
                 for (i=0;i<tSize;i++) {
                     free((void *)tArray[i].buffer);
                     free(tKeys[i]);
                 }
-                
+				free(tArray);
+				free(tKeys);
+
+
             }
             break;
         default:

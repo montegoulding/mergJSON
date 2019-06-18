@@ -1,12 +1,114 @@
-language: c
-sudo: false
-before_script: mkdir build
-script: make mergJSON-x64.so
-deploy:
-  provider: releases
-  api_key:
-    secure: yiehaOI6VhmgYNvVUml+i6G1dmpTcHaHdbGb/jyUgMSFjvX6REnzurC3DFlvpUxGcxOFsZ5v8U0JFazBnmpRfTohXEyVkrp0tr98l2E3/s+xycircXChvUxMbMElMbNgau970cNV1rkHWMjCaIVRnySeWtuc2+67wFWoWyBUECRkGq2HWrQvUGFMUuBRUYOCrBMd7VIzA4yrH3NXgd84dmyy2JCOJQbaCm+g4x0GjcdESXr0SmQWX8egqFro5n+HDsDh9yhD0dE7rNc0RAuckc23ZAipQpYToNAA55CT3R8wQLTRr4Wt4MCg6SAVpp5r7bLCDpdNTz8arovlQqgErasS/wsYWWTllebTRm3aG/uh/V18qQd6gXdvguuhcR5PUa4rjt6Ww+iq+Y5A/Nf0XN0ZKkjoLLTEQpFgt5NLCKvK1l+sVc3vR9Ebfp6hpVOjvjY6eCd7fBD9unTVRQapINP66yWL85qZYEiyYbIfHkCO4yrhq7Pbhr+0EOrWmJZSYOZ7rkeoQw0B148lktaT6MPtc8f7cdoV3iGVS2bulsf414AovHL3NxUiI9PlKqd5St4IfBIFQu6AtvaOHxDZmXTSkkXyi39yaQXEc9vp2sd74+ZR+SXqoDcZA5Fa+eln3EJyVaZLp69H2WyqFuasD+CrCOpscF3fM+Cw9MakHc0=
-  file: build/mergJSON-x64.so
-  on:
-    repo: montegoulding/mergJSON
-    tags: true
+sudo: required
+dist: trusty
+
+language: cpp
+
+os:
+- linux
+- osx
+- windows
+
+branches:
+  only:
+    - master
+
+# Use a Travis image containing an Xcode we support
+# This prevents surprise upgrades!
+osx_image: xcode7.3
+
+# Environment variables
+env:
+  global:
+   - CXX_STD: "c++11"
+
+jdk:
+  - openjdk8
+
+# Install any required tools
+before_install:
+  - |
+    if [[ "$TRAVIS_OS_NAME" == "linux" ]] ; then
+      sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+      sudo apt-get -qq update
+      sudo apt-get -qq install g++-4.9
+    fi
+
+script: |
+  case "${TRAVIS_OS_NAME}" in
+    linux)
+      BUILD_PLATFORM=linux
+      CHECK_COMMAND=xvfb-run
+      export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"${JAVA_HOME}/jre/lib/amd64/server"
+      export CXX="g++-4.9"
+      export CC="gcc-4.9"
+      make mergJSON-x64.so
+    ;;
+    osx)
+      BUILD_PLATFORM=mac
+      CHECK_COMMAND=
+      export XCODE_TARGET_SDK=macosx10.11
+      export XCODEBUILD="set -o pipefail && xcodebuild"
+      export JAVA_HOME=$(/usr/libexec/java_home)
+      xcodebuild -project mergJSON.xcodeproj -configuration Debug -target mergJSON-OSX -UseModernBuildSystem=NO build
+    ;;
+    windows)
+      export MSBUILD_PATH="c:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin"
+      export PATH=$MSBUILD_PATH:$PATH
+      MSBuild.exe "mergJSON\mergJSON.sln" //fl //flp:Verbosity=normal //nologo //m:1 //p:Configuration=Debug //p:Platform=x64
+    ;;
+  esac
+
+  # Run tests on mac and linux
+  if [[ "$TRAVIS_OS_NAME" == "linux" || "$TRAVIS_OS_NAME" == "osx" ]] ; then
+    # build livecode
+    export MODE=debug
+    git clone --depth 1 --recursive https://github.com/livecode/livecode.git &&
+    cd livecode/prebuilt && 
+    ./fetch-libraries.sh linux &&
+    cd .. &&
+    make all-${BUILD_PLATFORM}
+    if [ $? -ne 0 ] ; then
+        echo "    compile failed"
+        exit 1
+    fi
+
+    cd ..
+
+    # run tests
+    ${CHECK_COMMAND} make -C tests lcs-check
+    if [ $? -ne 0 ] ; then
+        echo "    tests failed - dumping log file"
+        cat tests/_lcs_test_suite.log
+        exit 1
+    fi
+  fi
+
+addons:
+  # Packages needed for building LiveCode
+  apt:
+    packages:
+      - gawk
+      - libx11-dev
+      - libxext-dev
+      - libxrender-dev
+      - libxft-dev
+      - libxinerama-dev
+      - libxv-dev
+      - libxcursor-dev
+      - libfreetype6-dev
+      - libgtk2.0-dev
+      - libpopt-dev
+      - libesd0-dev
+      - liblcms2-dev
+      - xvfb
+
+
+
+# deploy:
+#   provider: releases
+#   api_key:
+#     secure: yiehaOI6VhmgYNvVUml+i6G1dmpTcHaHdbGb/jyUgMSFjvX6REnzurC3DFlvpUxGcxOFsZ5v8U0JFazBnmpRfTohXEyVkrp0tr98l2E3/s+xycircXChvUxMbMElMbNgau970cNV1rkHWMjCaIVRnySeWtuc2+67wFWoWyBUECRkGq2HWrQvUGFMUuBRUYOCrBMd7VIzA4yrH3NXgd84dmyy2JCOJQbaCm+g4x0GjcdESXr0SmQWX8egqFro5n+HDsDh9yhD0dE7rNc0RAuckc23ZAipQpYToNAA55CT3R8wQLTRr4Wt4MCg6SAVpp5r7bLCDpdNTz8arovlQqgErasS/wsYWWTllebTRm3aG/uh/V18qQd6gXdvguuhcR5PUa4rjt6Ww+iq+Y5A/Nf0XN0ZKkjoLLTEQpFgt5NLCKvK1l+sVc3vR9Ebfp6hpVOjvjY6eCd7fBD9unTVRQapINP66yWL85qZYEiyYbIfHkCO4yrhq7Pbhr+0EOrWmJZSYOZ7rkeoQw0B148lktaT6MPtc8f7cdoV3iGVS2bulsf414AovHL3NxUiI9PlKqd5St4IfBIFQu6AtvaOHxDZmXTSkkXyi39yaQXEc9vp2sd74+ZR+SXqoDcZA5Fa+eln3EJyVaZLp69H2WyqFuasD+CrCOpscF3fM+Cw9MakHc0=
+#   file: build/mergJSON-x64.so
+#   on:
+#     repo: montegoulding/mergJSON
+#     tags: true
